@@ -18,6 +18,6 @@ Keep the repository name and owner unchanged so the URL cited in the paper stays
 
 ## Content scope
 
-The site currently provides the project introduction, selected scene 0042 sample, paper figures and citation. Full dataset release is planned after acceptance of the journal extension. Add public paper or data links when their versions and destinations are confirmed. Keep raw data, private notes, temporary QA artifacts and full local packages outside the repository.
+The site currently provides the project introduction, selected scene samples, temporal and angular explorers, paper pipeline and citation. Full dataset release is planned after acceptance of the journal extension. Add public paper or data links when their versions and destinations are confirmed. Keep raw data, private notes, temporary QA artifacts and full local packages outside the repository.
 
 The citation records the accepted VCIP 2026 paper. Add DOI and proceedings page numbers when assigned. Dataset licensing remains an author decision.

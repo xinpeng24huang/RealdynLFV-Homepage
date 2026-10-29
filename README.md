@@ -20,12 +20,14 @@ Open http://127.0.0.1:8793/ or http://127.0.0.1:8793/zh.html. Keep the server ru
 
 ## Source files
 
-- `content.json`: explicit English and Chinese strings, confirmed authors, statistics, results and citation. Both languages have the same keys.
+- `content.json`: explicit English and Chinese strings, confirmed authors, statistics, scene samples and citation. Both languages have the same keys.
 - `template.html`: shared semantic layout, local media references and section anchors.
 - `scripts/build.py`: escaped UTF-8 renderer. Produces both `index.html` and `zh.html`.
 - `scripts/check.py`: checks build freshness, local resources, anchors, bilingual sections, 25 camera controls and asset sizes.
 - `assets/style.css`: responsive layout. No external font requests.
-- `assets/demo.js`: view selector, keyboard navigation, user-started view sweep, video mode switching and citation copy.
+- `assets/demo.js`: view selector, keyboard navigation, six-scene selection, user-started view sweep, video mode and speed switching, and citation copy.
+- `assets/temporal.js`: exact-index browsing of 150 recorded center-view frames.
+- `assets/explorers.css`: styles for temporal sampling, scene selection and the diversity gallery.
 - `assets/gallery.js`: native image dialog, Escape handling and focus return. Image links still work without JavaScript.
 - `assets/language.js`: explicit language links preserving the current section; no automatic redirects.
 - `assets/media/` and `assets/identity/`: web derivatives and official institution marks. See `docs/MEDIA.md` for provenance.
@@ -34,6 +36,6 @@ Edit sources, rebuild, and commit generated HTML with the sources. GitHub Pages 
 
 ## Review
 
-Run the static checks, then inspect both languages at desktop and mobile sizes. Verify center/array video playback, all 25 views, keyboard navigation, view sweep/stop/reset, image preview/close, language links, sample download and resource requests. Check subdirectory hosting as well as root hosting. Keep temporary screenshots, browser dependencies and internal research records outside this repository.
+Run the static checks, then inspect both languages at desktop and mobile sizes. Verify center/array video playback, all 25 views in each of six scenes, temporal frame navigation, keyboard navigation, view sweep/stop/reset, image preview/close, language links, sample download and resource requests. Check subdirectory hosting as well as root hosting. Keep temporary screenshots, browser dependencies and internal research records outside this repository.
 
 Publishing requires author review of the complete preview. See `docs/DEPLOYMENT.md`.

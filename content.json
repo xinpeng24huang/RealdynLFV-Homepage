@@ -31,32 +31,6 @@
     "1920 × 1080",
     "60"
   ],
-  "results": [
-    [
-      "30",
-      "10.1665",
-      "+0.2438",
-      "+0.0176"
-    ],
-    [
-      "35",
-      "5.6606",
-      "+0.2232",
-      "+0.0181"
-    ],
-    [
-      "40",
-      "2.9758",
-      "+0.2927",
-      "+0.0173"
-    ],
-    [
-      "45",
-      "1.4482",
-      "+0.2266",
-      "+0.0112"
-    ]
-  ],
   "citation": "@inproceedings{han2026realdynlfv,\n  title = {RealDynLFV: A Large-Parallax Benchmark for\n           Real-World Dynamic Light Field Video},\n  author = {Han, Zhehao and Zheng, Yinfeng and Mao, Yifan\n            and Wu, Xianliang and Huang, Xinpeng\n            and Yang, Chao and An, Ping},\n  booktitle = {IEEE Visual Communications and Image Processing (VCIP)},\n  year = {2026},\n  note = {Accepted},\n  url = {https://xinpeng24huang.github.io/RealdynLFV-Homepage/}\n}",
   "locales": {
     "en": {
@@ -64,15 +38,14 @@
       "meta_description": "A real-world dynamic light field video benchmark: 45 scenes, 5×5 views, 1080p and nominal 60 fps. Explore a sample and the VCIP 2026 evaluation.",
       "skip": "Skip to content",
       "navigation": "Main navigation",
-      "nav_explore": "Explore",
+      "nav_explore": "Viewpoints",
       "nav_dataset": "Dataset",
-      "nav_benchmark": "Evaluation",
+      "nav_benchmark": "Applications",
       "nav_resources": "Resources",
-      "accepted": "Accepted",
       "affiliation": "School of Communication and Information Engineering, Shanghai University",
       "corresponding": "* Corresponding author",
       "explore_views": "Explore the views",
-      "see_results": "Evaluation results",
+      "see_results": "Explore motion",
       "cite": "Cite this work",
       "video_alt": "Scene 0042: a person crossing the court, center camera C3 or 5×5 camera array",
       "video_fallback": "Your browser can download the sample video.",
@@ -82,17 +55,17 @@
       "center_view": "Center view",
       "array_view": "5×5 array",
       "video_caption": "A 2.5-second excerpt, played at its original 59.94 fps. Center view or full 5×5 array.",
-      "motion_title": "Motion across 25 viewpoints",
-      "motion_description": "Real scenes recorded by a consumer-camera array, with moving subjects and large inter-view parallax.",
+      "motion_title": "Motion, at 60 fps",
+      "motion_description": "Dynamic light fields record how a scene changes over time and across viewpoints. Explore both dimensions in the samples below.",
       "stat_labels": [
         "Dynamic scenes",
         "Camera views",
         "Pixels per view",
         "Nominal fps"
       ],
-      "motion_note": "Play the clip to see motion. Use the view selector below to examine parallax at one moment.",
-      "explore_title": "One moment, 25 perspectives",
-      "explore_intro": "Watch how the person and foreground shift relative to the background as the viewpoint changes.",
+      "motion_note": "Play at the original rate or slow down to inspect the motion. The frame browser below retains the recorded temporal samples.",
+      "explore_title": "Large parallax, across real scenes",
+      "explore_intro": "Choose a scene, then change cameras while holding time fixed. Compare foreground displacement, occlusion and reflections.",
       "view": "View",
       "camera": "Camera",
       "view_alt": "Court scene 0042 at frame 91, camera",
@@ -108,7 +81,7 @@
       "image_error": "The image could not load. Select a camera to retry.",
       "sample_details_title": "Sample and playback details",
       "sample_details": "Scene 0042 corresponds to Secondsyn/0030_seg02 (16.0–18.5 s in the source recording). The center video uses 150 standardized JPEG frames, resized to 1280×720. The existing array preview contains 149 decoded frames at 1920×1080 and retains its original camera labels, crop and color. Both are H.264 web encodes at the original 59.94 fps, without audio.",
-      "sample_timing": "The view selector uses JPEG frame 91 (t = 1.502 s) from all 25 cameras, resized to 960×540 WebP without further cropping or color adjustment. Camera recordings use audio-based temporal alignment and nearest-frame trimming.",
+      "sample_timing": "The viewpoint explorer uses the same frame index across 25 cameras for each scene. Images are resized to 960×540 WebP without further cropping or color adjustment. Temporal alignment uses a clapperboard acoustic transient and nearest-frame trimming.",
       "dataset_title": "A benchmark for real capture",
       "dataset_description": "RealDynLFV contains 45 dynamic sequences: 29 outdoor, 15 indoor and one mixed scene. The standardized sequences contain 9,031 temporal frames, each with 25 views.",
       "dataset_challenges": "Large angular displacement, occlusion and view-dependent appearance make sparse-view reconstruction challenging. The benchmark also captures geometric and photometric variation encountered with consumer cameras.",
@@ -117,17 +90,17 @@
       "test": "Test",
       "split_caption": "Sequence-level split with scene-disjoint testing.",
       "diversity_alt": "Nine center-view examples: indoor objects, entrances, stairs, trees, a car, a bicycle, fencing, foliage and basketball.",
-      "diversity_caption": "Center-view examples from the paper.",
+      "diversity_caption": "15 center-view examples from the dataset. Select an image to enlarge it.",
       "pipeline_title": "From camera recordings to light field video",
-      "pipeline_alt": "Processing pipeline: audio alignment, geometric rectification, shared cropping, fixed LUT and 5×5 JPEG frame-sequence export.",
+      "pipeline_alt": "Processing pipeline: acoustic temporal alignment, geometric rectification, shared cropping, fixed LUT and 5×5 JPEG frame-sequence export.",
       "steps": [
         [
           "Capture",
           "25 action cameras, 80 mm nominal spacing; source recordings at 4K/60 fps."
         ],
         [
-          "Align",
-          "Estimate offsets from a clap signal and trim to a common start using the nearest frame."
+          "Temporal alignment",
+          "Estimate inter-camera offsets by cross-correlating the clapperboard's acoustic transient, then trim to a common start using the nearest frame."
         ],
         [
           "Standardize",
@@ -138,21 +111,13 @@
           "8-bit JPEG sequences with consistent view indices and frame names."
         ]
       ],
-      "benchmark_title": "Sparse-view reconstruction and coding",
-      "benchmark_intro": "Dataset-matched training improves reconstruction at all four QP settings.",
-      "benchmark_protocol": "Four corner views (v00, v04, v20, v24) are encoded with MV-HEVC at QP 30, 35, 40 and 45. The decoder reconstructs all 25 views.",
-      "benchmark_comparison": "Within the same sparse-view coding framework, training on RealDynLFV outperforms direct transfer of the model pretrained on Sintel.",
-      "gains_caption": "Mean gain over Sintel zero-shot across four QPs. Quality is averaged over 25 reconstructed views; bitrate counts the four encoded views.",
-      "rd_alt": "Rate-distortion curves for Sintel zero-shot and RealDynLFV-matched training, measured by 25-view PSNR-Y and SSIM-Y.",
-      "rd_caption": "Rate-distortion results on eight held-out test sequences.",
-      "results_details": "Results by quantization parameter",
-      "table_caption": "RealDynLFV-matched minus Sintel zero-shot",
-      "bitrate": "Bitrate (Mbps)",
+      "benchmark_title": "A dataset for reconstruction and coding",
+      "benchmark_intro": "The paper evaluates an existing sparse-view LFV coding framework on RealDynLFV, using the fixed 32/5/8 split. Four encoded corner views are used to reconstruct all 25 views. This provides a practical evaluation setting for studying LFV reconstruction and compression.",
       "resources_title": "Resources",
       "release_text": "This page provides an interactive sample from RealDynLFV. The full dataset is planned for public release after acceptance of the journal extension.",
-      "sample_download": "Download 5×5 sample",
+      "sample_download": "Download array demo",
       "repository": "Homepage source",
-      "contact": "Contact the authors",
+      "contact": "Xinpeng Huang (corresponding author)",
       "citation_title": "Citation",
       "copy": "Copy BibTeX",
       "copied": "Copied",
@@ -165,22 +130,38 @@
       "image_preview": "Image preview",
       "close_preview": "Close",
       "framework_source": "Coding framework: Li et al., TCSVT",
-      "play_video": "Play sample"
+      "play_video": "Play sample",
+      "nav_motion": "Motion",
+      "speed_label": "Playback speed",
+      "normal_speed": "1× Original speed",
+      "slow_speed": "0.25× Slow motion",
+      "speed_note": "Slow playback uses the recorded frames without interpolation.",
+      "time_title": "Follow the motion, frame by frame",
+      "time_intro": "150 recorded frames from camera C3. At 59.94 fps (nominal 60 fps), consecutive frames are 16.68 ms apart.",
+      "time_slider": "Recorded frame",
+      "previous_frame": "Previous frame",
+      "next_frame": "Next frame",
+      "time_note": "Scene 0042. Three consecutive frames; drag the slider to move through the clip. Select an image to enlarge it.",
+      "frame_word": "Frame",
+      "time_word": "Time",
+      "time_alt": "Scene 0042, camera C3, recorded frame",
+      "scene_selection": "Choose a scene",
+      "selected_scene_description": "A person passing close to the camera array.",
+      "more_motion": "Movement across different scenes"
     },
     "zh": {
       "page_title": "RealDynLFV | VCIP 2026",
       "meta_description": "真实世界动态光场视频基准：45 个场景、5×5 视角、1080p、标称 60 fps。查看交互样例与 VCIP 2026 评测。",
       "skip": "跳至正文",
       "navigation": "主导航",
-      "nav_explore": "交互样例",
+      "nav_explore": "视角",
       "nav_dataset": "数据集",
-      "nav_benchmark": "评测",
+      "nav_benchmark": "应用验证",
       "nav_resources": "资源",
-      "accepted": "已接收",
       "affiliation": "上海大学通信与信息工程学院",
       "corresponding": "* 通讯作者",
       "explore_views": "探索不同视角",
-      "see_results": "评测结果",
+      "see_results": "观察连续运动",
       "cite": "引用本文",
       "video_alt": "场景 0042：人物跑过球场，中心相机 C3 或 5×5 相机阵列",
       "video_fallback": "可下载样例视频观看。",
@@ -190,17 +171,17 @@
       "center_view": "中心视角",
       "array_view": "5×5 阵列",
       "video_caption": "约 2.5 秒片段，按原始 59.94 fps 播放。可切换中心视角与完整 5×5 阵列。",
-      "motion_title": "25 个视角中的运动",
-      "motion_description": "消费级相机阵列记录真实动态场景，呈现运动中的物体及不同视角间明显的视差。",
+      "motion_title": "60 fps 的连续运动",
+      "motion_description": "动态光场记录场景随时间和观察视角的变化。下方样例分别展示这两个维度。",
       "stat_labels": [
         "动态场景",
         "相机视角",
         "单视角分辨率",
         "标称帧率"
       ],
-      "motion_note": "播放视频观察运动；在下方选择不同相机，查看同一时刻的视差。",
-      "explore_title": "同一时刻，25 个视角",
-      "explore_intro": "切换观察位置，看人物和近处地面相对远处背景如何移动。",
+      "motion_note": "可按原速播放或慢放观察动作，下方逐帧浏览保留实际记录的时间采样。",
+      "explore_title": "在真实场景中观察大视差",
+      "explore_intro": "先选择场景，再固定时间切换相机，观察前景位移、遮挡与反射的变化。",
       "view": "视角",
       "camera": "相机",
       "view_alt": "球场场景 0042，第 91 帧，相机",
@@ -216,7 +197,7 @@
       "image_error": "图片加载失败，请重新选择相机。",
       "sample_details_title": "样例与播放说明",
       "sample_details": "场景 0042 对应 Secondsyn/0030_seg02（源视频 16.0–18.5 秒）。中心视频采用 150 张标准化 JPEG，缩放至 1280×720；现有阵列预览含 149 个解码帧，分辨率为 1920×1080，保留原相机标注、裁剪和色彩。两者均以原始 59.94 fps 转码为 H.264 网页视频，不含音轨。",
-      "sample_timing": "视角选择器采用全部 25 台相机的 JPEG 第 91 帧（t = 1.502 秒），缩放为 960×540 WebP，无额外裁剪或调色。各相机使用音频时间对齐与最近帧裁剪。",
+      "sample_timing": "视角交互对每个场景使用全部 25 台相机的相同帧编号。图片缩放为 960×540 WebP，无额外裁剪或调色；时间对齐基于场记板瞬态声学标记与最近帧裁剪。",
       "dataset_title": "面向真实采集的基准",
       "dataset_description": "RealDynLFV 包含 45 个动态序列：29 个室外、15 个室内及 1 个室内外混合场景。标准化序列共含 9,031 个时间帧，每帧包含 25 个视角。",
       "dataset_challenges": "大视差、遮挡和随视角变化的外观为稀疏视角重建带来挑战。数据也保留了消费级多相机采集中出现的几何与光度差异。",
@@ -225,17 +206,17 @@
       "test": "测试",
       "split_caption": "按序列划分，测试场景与训练场景独立。",
       "diversity_alt": "九个中心视角示例：室内物品、入口、楼梯、树木、汽车、自行车、围栏、绿植和篮球。",
-      "diversity_caption": "论文中的中心视角场景示例。",
+      "diversity_caption": "来自数据集的 15 个中心视角示例，点击图片可放大。",
       "pipeline_title": "从相机视频到光场序列",
-      "pipeline_alt": "处理流程：音频对齐、几何校正、共享裁剪、固定 LUT 及 5×5 JPEG 帧序列导出。",
+      "pipeline_alt": "处理流程：声学时间对齐、几何校正、共享裁剪、固定 LUT 及 5×5 JPEG 帧序列导出。",
       "steps": [
         [
           "采集",
           "25 台运动相机，标称间距 80 mm；源视频为 4K/60 fps。"
         ],
         [
-          "对齐",
-          "通过拍手音频估计偏移，按最近帧裁剪至共同起点。"
+          "声学时间对齐",
+          "利用场记板瞬态声学标记，通过互相关估计相机间时间偏移，再按最近帧裁剪至共同起点。"
         ],
         [
           "标准化",
@@ -246,21 +227,13 @@
           "生成视角索引与帧命名一致的 8 位 JPEG 序列。"
         ]
       ],
-      "benchmark_title": "稀疏视角重建与编码",
-      "benchmark_intro": "在四个编码设置下，数据集匹配训练均提升了重建质量。",
-      "benchmark_protocol": "四角视角（v00、v04、v20、v24）经 MV-HEVC 编码，QP 为 30、35、40、45，解码端重建完整 25 视角。",
-      "benchmark_comparison": "在同一稀疏视角编码框架下，使用 RealDynLFV 训练优于直接迁移 Sintel 预训练模型。",
-      "gains_caption": "相对 Sintel 零样本迁移的四 QP 平均增益。质量取重建后 25 视角均值，码率来自四视角码流。",
-      "rd_alt": "Sintel 零样本迁移与 RealDynLFV 匹配训练的率失真曲线，指标为 25 视角 PSNR-Y 和 SSIM-Y。",
-      "rd_caption": "8 个独立测试序列上的率失真结果。",
-      "results_details": "各量化参数下的结果",
-      "table_caption": "RealDynLFV 匹配训练相对 Sintel 零样本迁移的增益",
-      "bitrate": "码率 (Mbps)",
+      "benchmark_title": "用于重建与编码的数据集",
+      "benchmark_intro": "论文已在 RealDynLFV 上运行现有稀疏视角光场视频编码框架，采用固定的 32/5/8 划分，由四个编码角视图重建完整 25 视角，为光场视频重建与压缩研究提供实际评测场景。",
       "resources_title": "项目资源",
       "release_text": "本页提供 RealDynLFV 交互样例。完整数据集计划在期刊扩展稿录用后公开。",
-      "sample_download": "下载 5×5 样例",
+      "sample_download": "下载阵列演示视频",
       "repository": "主页源码",
-      "contact": "联系作者",
+      "contact": "Xinpeng Huang（通讯作者）",
       "citation_title": "引用",
       "copy": "复制 BibTeX",
       "copied": "已复制",
@@ -273,7 +246,341 @@
       "image_preview": "图片预览",
       "close_preview": "关闭",
       "framework_source": "编码框架：Li 等，TCSVT",
-      "play_video": "播放样例"
+      "play_video": "播放样例",
+      "nav_motion": "运动",
+      "speed_label": "播放速度",
+      "normal_speed": "1× 原速",
+      "slow_speed": "0.25× 慢放",
+      "speed_note": "慢放使用实拍帧，不做插帧。",
+      "time_title": "逐帧观察运动",
+      "time_intro": "中心相机 C3 的 150 个实拍帧。记录帧率为 59.94 fps（标称 60 fps），相邻帧间隔约 16.68 毫秒。",
+      "time_slider": "实拍帧",
+      "previous_frame": "上一帧",
+      "next_frame": "下一帧",
+      "time_note": "场景 0042。每组展示连续三帧，拖动滑块浏览整个片段，点击图片可放大。",
+      "frame_word": "第",
+      "time_word": "时间",
+      "time_alt": "场景 0042，中心相机 C3，实拍帧",
+      "scene_selection": "选择场景",
+      "selected_scene_description": "人物从相机阵列近处经过。",
+      "more_motion": "不同场景中的真实运动"
     }
-  }
+  },
+  "scenes": [
+    {
+      "id": "0042",
+      "frame": 91,
+      "fps": 59.94005994005994,
+      "name": {
+        "en": "Court motion",
+        "zh": "球场运动"
+      },
+      "hint": {
+        "en": "A person crosses close to the array. Follow the foreground shift against the distant court.",
+        "zh": "人物从阵列近处经过，观察前景相对远处球场的位移。"
+      },
+      "thumb": "assets/media/scene0042-poster.webp",
+      "prefix": "assets/media/scene0042-view-"
+    },
+    {
+      "id": "0001",
+      "frame": 91,
+      "name": {
+        "en": "Tabletop objects",
+        "zh": "桌面物件"
+      },
+      "hint": {
+        "en": "Watch the nearby objects shift against the monitor.",
+        "zh": "观察近处物件相对显示器的位置变化。"
+      },
+      "thumb": "assets/media/scenes/0001/thumb.webp",
+      "fps": 59.94,
+      "prefix": "assets/media/scenes/0001/view-"
+    },
+    {
+      "id": "0021",
+      "frame": 91,
+      "name": {
+        "en": "Tree trunk",
+        "zh": "近处树干"
+      },
+      "hint": {
+        "en": "Watch the trunk move relative to the road and buildings.",
+        "zh": "观察树干相对道路和建筑的位置变化。"
+      },
+      "thumb": "assets/media/scenes/0021/thumb.webp",
+      "fps": 59.94,
+      "prefix": "assets/media/scenes/0021/view-"
+    },
+    {
+      "id": "0025",
+      "frame": 91,
+      "name": {
+        "en": "Vehicle reflections",
+        "zh": "车窗反射"
+      },
+      "hint": {
+        "en": "Compare the reflections across camera positions.",
+        "zh": "比较不同相机位置看到的反射。"
+      },
+      "thumb": "assets/media/scenes/0025/thumb.webp",
+      "fps": 59.94,
+      "prefix": "assets/media/scenes/0025/view-"
+    },
+    {
+      "id": "0030",
+      "frame": 91,
+      "name": {
+        "en": "Bicycle wheel",
+        "zh": "自行车轮"
+      },
+      "hint": {
+        "en": "Follow the spokes and the gaps between them as the view changes.",
+        "zh": "切换视角，观察细辐条及其间隙。"
+      },
+      "thumb": "assets/media/scenes/0030/thumb.webp",
+      "fps": 59.94,
+      "prefix": "assets/media/scenes/0030/view-"
+    },
+    {
+      "id": "0044",
+      "frame": 91,
+      "name": {
+        "en": "Through the fence",
+        "zh": "围网后的行人"
+      },
+      "hint": {
+        "en": "Watch the fence shift across the person and background.",
+        "zh": "观察围网相对行人与背景的遮挡变化。"
+      },
+      "thumb": "assets/media/scenes/0044/thumb.webp",
+      "fps": 59.94,
+      "prefix": "assets/media/scenes/0044/view-"
+    }
+  ],
+  "diversity": [
+    {
+      "id": "0001",
+      "frame": 91,
+      "name": {
+        "en": "Tabletop objects",
+        "zh": "桌面物件"
+      },
+      "caption": {
+        "en": "Scene 0001 · center view C3 · frame 91.",
+        "zh": "场景 0001 · 中心视角 C3 · 第 91 帧。"
+      },
+      "src": "assets/media/diversity/0001.webp"
+    },
+    {
+      "id": "0003",
+      "frame": 61,
+      "name": {
+        "en": "Laboratory",
+        "zh": "实验室"
+      },
+      "caption": {
+        "en": "Scene 0003 · center view C3 · frame 61.",
+        "zh": "场景 0003 · 中心视角 C3 · 第 61 帧。"
+      },
+      "src": "assets/media/diversity/0003.webp"
+    },
+    {
+      "id": "0004",
+      "frame": 91,
+      "name": {
+        "en": "Floor reflections",
+        "zh": "地面反射"
+      },
+      "caption": {
+        "en": "Scene 0004 · center view C3 · frame 91.",
+        "zh": "场景 0004 · 中心视角 C3 · 第 91 帧。"
+      },
+      "src": "assets/media/diversity/0004.webp"
+    },
+    {
+      "id": "0009",
+      "frame": 121,
+      "name": {
+        "en": "Glass doorway",
+        "zh": "玻璃门"
+      },
+      "caption": {
+        "en": "Scene 0009 · center view C3 · frame 121.",
+        "zh": "场景 0009 · 中心视角 C3 · 第 121 帧。"
+      },
+      "src": "assets/media/diversity/0009.webp"
+    },
+    {
+      "id": "0016",
+      "frame": 91,
+      "name": {
+        "en": "Stairwell",
+        "zh": "楼梯间"
+      },
+      "caption": {
+        "en": "Scene 0016 · center view C3 · frame 91.",
+        "zh": "场景 0016 · 中心视角 C3 · 第 91 帧。"
+      },
+      "src": "assets/media/diversity/0016.webp"
+    },
+    {
+      "id": "0019",
+      "frame": 91,
+      "name": {
+        "en": "Outdoor walking",
+        "zh": "室外步行"
+      },
+      "caption": {
+        "en": "Scene 0019 · center view C3 · frame 91.",
+        "zh": "场景 0019 · 中心视角 C3 · 第 91 帧。"
+      },
+      "src": "assets/media/diversity/0019.webp"
+    },
+    {
+      "id": "0021",
+      "frame": 91,
+      "name": {
+        "en": "Tree trunk",
+        "zh": "近处树干"
+      },
+      "caption": {
+        "en": "Scene 0021 · center view C3 · frame 91.",
+        "zh": "场景 0021 · 中心视角 C3 · 第 91 帧。"
+      },
+      "src": "assets/media/diversity/0021.webp"
+    },
+    {
+      "id": "0023",
+      "frame": 91,
+      "name": {
+        "en": "Shrub leaves",
+        "zh": "灌木叶片"
+      },
+      "caption": {
+        "en": "Scene 0023 · center view C3 · frame 91.",
+        "zh": "场景 0023 · 中心视角 C3 · 第 91 帧。"
+      },
+      "src": "assets/media/diversity/0023.webp"
+    },
+    {
+      "id": "0024",
+      "frame": 91,
+      "name": {
+        "en": "Backlit path",
+        "zh": "逆光步道"
+      },
+      "caption": {
+        "en": "Scene 0024 · center view C3 · frame 91.",
+        "zh": "场景 0024 · 中心视角 C3 · 第 91 帧。"
+      },
+      "src": "assets/media/diversity/0024.webp"
+    },
+    {
+      "id": "0025",
+      "frame": 91,
+      "name": {
+        "en": "Vehicle reflections",
+        "zh": "车窗反射"
+      },
+      "caption": {
+        "en": "Scene 0025 · center view C3 · frame 91.",
+        "zh": "场景 0025 · 中心视角 C3 · 第 91 帧。"
+      },
+      "src": "assets/media/diversity/0025.webp"
+    },
+    {
+      "id": "0028",
+      "frame": 91,
+      "name": {
+        "en": "Building facade",
+        "zh": "建筑立面"
+      },
+      "caption": {
+        "en": "Scene 0028 · center view C3 · frame 91.",
+        "zh": "场景 0028 · 中心视角 C3 · 第 91 帧。"
+      },
+      "src": "assets/media/diversity/0028.webp"
+    },
+    {
+      "id": "0030",
+      "frame": 91,
+      "name": {
+        "en": "Bicycle wheel",
+        "zh": "自行车轮"
+      },
+      "caption": {
+        "en": "Scene 0030 · center view C3 · frame 91.",
+        "zh": "场景 0030 · 中心视角 C3 · 第 91 帧。"
+      },
+      "src": "assets/media/diversity/0030.webp"
+    },
+    {
+      "id": "0034",
+      "frame": 91,
+      "name": {
+        "en": "Foreground fence",
+        "zh": "前景围栏"
+      },
+      "caption": {
+        "en": "Scene 0034 · center view C3 · frame 91.",
+        "zh": "场景 0034 · 中心视角 C3 · 第 91 帧。"
+      },
+      "src": "assets/media/diversity/0034.webp"
+    },
+    {
+      "id": "0042",
+      "frame": 91,
+      "name": {
+        "en": "Court motion",
+        "zh": "球场运动"
+      },
+      "caption": {
+        "en": "Scene 0042 · center view C3 · frame 91.",
+        "zh": "场景 0042 · 中心视角 C3 · 第 91 帧。"
+      },
+      "src": "assets/media/diversity/0042.webp"
+    },
+    {
+      "id": "0045",
+      "frame": 91,
+      "name": {
+        "en": "Lakeside path",
+        "zh": "湖边步道"
+      },
+      "caption": {
+        "en": "Scene 0045 · center view C3 · frame 91.",
+        "zh": "场景 0045 · 中心视角 C3 · 第 91 帧。"
+      },
+      "src": "assets/media/diversity/0045.webp"
+    }
+  ],
+  "motions": [
+    {
+      "id": "0009",
+      "name": {
+        "en": "Opening a glass door",
+        "zh": "推开玻璃门"
+      },
+      "caption": {
+        "en": "A person moves through a glass door as it swings open.",
+        "zh": "人物推门穿行，门扇与反射随之变化。"
+      },
+      "src": "assets/media/scene0009-center.mp4",
+      "poster": "assets/media/scene0009-poster.webp"
+    },
+    {
+      "id": "0044",
+      "name": {
+        "en": "Walking behind a fence",
+        "zh": "围网后步行"
+      },
+      "caption": {
+        "en": "A person moves behind a foreground mesh fence.",
+        "zh": "人物从前景围网后经过。"
+      },
+      "src": "assets/media/scene0044-center.mp4",
+      "poster": "assets/media/scene0044-poster.webp"
+    }
+  ]
 }

@@ -60,13 +60,23 @@ def main():
         assert [a['data-view'] for a in p.buttons] == [f'{i:02}' for i in range(25)]
         assert sum(a.get('aria-pressed') == 'true' for a in p.buttons) == 1
         for logo in ['shu-emblem.png', 'scie-emblem.png']:
-            assert sum(a.get('src', '').endswith(logo) for a in p.images) == 1
+            assert sum(a.get('src', '').endswith(logo) for a in p.images) == 2
         assert '{{' not in text and 'WaterPig02' not in text and 'placeholder' not in text
         pages.append(p)
-        print(f'{filename}: current build, local resources, anchors, 25 views, logos and language PASS')
+        assert len(re.findall(r'data-scene="', text)) == 6
+        assert text.count('class="motion-clip"') == 2
+        assert '<div class="gains">' not in text and 'benchmark-rd.webp' not in text
+        assert 'audio-clap' not in text and 'clap signal' not in text and '拍手' not in text
+        print(f'{filename}: current build, resources, 6 scenes, 25 views, temporal browser, logos and language PASS')
     assert pages[0].ids == pages[1].ids, 'Languages have different sections'
     for i in range(25):
         assert (ROOT/f'assets/media/scene0042-view-{i:02}.webp').is_file()
+    for scene in c['scenes']:
+        for i in range(25):
+            assert (ROOT/f'{scene["prefix"]}{i:02}.webp').is_file()
+    for i in range(1,151):
+        assert (ROOT/f'assets/media/time0042/frame-{i:03}.webp').is_file()
+    assert len(c['diversity']) == 15
     for filename in ['scene0042-center.mp4', 'scene0042-grid.mp4', 'scene0042-grid-poster.webp']:
         assert (ROOT/'assets/media'/filename).is_file()
     for path in (ROOT/'assets').rglob('*'):

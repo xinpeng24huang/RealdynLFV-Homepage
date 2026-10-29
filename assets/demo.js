@@ -3,19 +3,24 @@
   const img = document.querySelector("#selected-view");
   const link = document.querySelector(".selected-view-link");
   const buttons = [...document.querySelectorAll("[data-view]")];
+  const scenes = [...document.querySelectorAll("[data-scene]")];
   const label = document.querySelector("#view-label");
   const sweepButton = document.querySelector("#sweep-views");
   const imageError = document.querySelector("#image-error");
-  const baseAlt = img.alt.replace(/ C3 \(v12\)$/, "");
+  const isZh = document.documentElement.lang.startsWith("zh");
   let selected = 12,
     sequence = 0,
     sweepTimer,
-    sweeping = false;
+    sweeping = false,
+    sweepRun = 0;
+  let activeScene = scenes[0];
 
-  async function selectView(index) {
+  async function selectView(index, scene = activeScene) {
     const request = ++sequence;
+    activeScene = scene;
+    selected = index;
     const button = buttons[index];
-    const src = `assets/media/scene0042-view-${button.dataset.view}.webp`;
+    const src = `${scene.dataset.prefix}${button.dataset.view}.webp`;
     const next = new Image();
     next.src = src;
     try {
@@ -26,22 +31,35 @@
     }
     if (request !== sequence) return false;
     selected = index;
+    activeScene = scene;
     imageError.textContent = "";
     img.src = src;
-    img.alt = `${baseAlt} ${button.dataset.camera} (v${button.dataset.view})`;
+    img.alt = `${scene.dataset.name}, ${isZh ? "第" : "frame"} ${scene.dataset.frame}, ${explorer.dataset.cameraLabel} ${button.dataset.camera} (v${button.dataset.view})`;
     link.href = src;
     label.textContent = `${explorer.dataset.cameraLabel} ${button.dataset.camera} / v${button.dataset.view}`;
+    document.querySelector("#view-frame-label").textContent =
+      `${scene.dataset.scene} / ${isZh ? "第" : "Frame"} ${scene.dataset.frame} / t = ${scene.dataset.time} s`;
+    document.querySelector("#scene-description").textContent =
+      scene.dataset.hint;
     buttons.forEach((b, i) =>
       b.setAttribute("aria-pressed", String(i === index)),
     );
+    scenes.forEach((b) => b.setAttribute("aria-pressed", String(b === scene)));
     return true;
   }
   function stopSweep() {
     sweeping = false;
+    sweepRun++;
     clearTimeout(sweepTimer);
     sweepButton.textContent = sweepButton.dataset.start;
     sweepButton.setAttribute("aria-pressed", "false");
   }
+  scenes.forEach((scene) =>
+    scene.addEventListener("click", () => {
+      stopSweep();
+      selectView(selected, scene);
+    }),
+  );
   buttons.forEach((button, i) => {
     button.addEventListener("click", () => {
       stopSweep();
@@ -70,19 +88,21 @@
     stopSweep();
     selectView(12);
   });
-  sweepButton.addEventListener("click", async () => {
+  sweepButton.addEventListener("click", () => {
     if (sweeping) {
       stopSweep();
       return;
     }
     sweeping = true;
+    const run = ++sweepRun;
     sweepButton.textContent = sweepButton.dataset.stop;
     sweepButton.setAttribute("aria-pressed", "true");
     let index = 10;
     const tick = async () => {
-      if (!sweeping) return;
+      if (!sweeping || run !== sweepRun) return;
       const success = await selectView(index);
-      if (!success || !sweeping) {
+      if (!sweeping || run !== sweepRun) return;
+      if (!success) {
         stopSweep();
         return;
       }
@@ -99,6 +119,11 @@
   }).observe(explorer);
 
   const video = document.querySelector("#scene-video");
+  const speed = document.querySelector("#playback-speed");
+  speed.addEventListener("change", () => {
+    video.defaultPlaybackRate = Number(speed.value);
+    video.playbackRate = Number(speed.value);
+  });
   const playButton = document.querySelector("#play-video");
   video.controls = false;
   playButton.hidden = false;
@@ -133,6 +158,7 @@
         "loadedmetadata",
         () => {
           if (request !== videoRequest) return;
+          video.playbackRate = Number(speed.value);
           video.currentTime = Math.min(
             time,
             Math.max(0, video.duration - 0.05),

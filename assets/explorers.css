@@ -1,0 +1,395 @@
+/* Temporal sampling, scene selection and dataset coverage. */
+.more-motion {
+  margin-top: 48px;
+}
+.motion-clips {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+.motion-clip h4 {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 17px;
+  margin: 0 0 12px;
+}
+.motion-clip h4 span {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--muted);
+}
+.motion-clip video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border-radius: 7px;
+  background: #101827;
+}
+@media (max-width: 600px) {
+  .motion-clips {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+.masthead-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  gap: 24px;
+}
+.masthead-top .conference {
+  margin: 0;
+}
+.hero-marks {
+  gap: 18px;
+}
+.hero-marks img {
+  height: 50px;
+  width: auto;
+}
+.speed-control {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: var(--muted);
+}
+.speed-control select {
+  font: inherit;
+  color: var(--ink);
+  padding: 6px 9px;
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 4px;
+  min-height: 36px;
+}
+.speed-control > span {
+  font-size: 11px;
+}
+.temporal-section {
+  padding: 10px 0 44px;
+}
+.temporal-section .section-heading {
+  margin-bottom: 22px;
+}
+.filmstrip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.time-frame {
+  padding: 5px;
+  background: var(--wash);
+  border-radius: 6px;
+  border: 2px solid transparent;
+}
+.time-frame[data-selected="true"] {
+  border-color: var(--blue);
+}
+.time-frame img {
+  border-radius: 3px;
+}
+.time-frame figcaption {
+  display: flex;
+  justify-content: space-between;
+  margin: 7px 4px 3px;
+  font-variant-numeric: tabular-nums;
+  font-size: 12px;
+}
+.time-controls {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  margin-top: 18px;
+}
+.time-controls button {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 8px 13px;
+  min-height: 42px;
+  font-size: 13px;
+}
+.time-controls button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.time-slider {
+  flex: 1;
+  max-width: 640px;
+  margin: auto;
+}
+.time-slider label {
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+}
+.time-slider input {
+  display: block;
+  width: 100%;
+  height: 28px;
+  accent-color: var(--blue);
+  cursor: pointer;
+}
+.temporal-section > .caption {
+  margin-top: 14px;
+}
+.scene-selector {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.scene-option {
+  border: 2px solid transparent;
+  border-radius: 6px;
+  background: #fff;
+  padding: 5px;
+  text-align: left;
+  min-width: 0;
+}
+.scene-option img {
+  border-radius: 3px;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  width: 100%;
+  height: auto;
+}
+.scene-option span {
+  display: block;
+  margin: 7px 5px 0;
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 600;
+}
+.scene-option small {
+  display: block;
+  margin: 3px 5px;
+  font-size: 11px;
+  color: var(--muted);
+}
+.scene-option[aria-pressed="true"] {
+  border-color: var(--blue);
+}
+.scene-option:hover {
+  background: #e5edfa;
+}
+.scene-description {
+  font-size: 14px;
+  color: var(--muted);
+  margin: 18px 0 22px;
+}
+.dataset-overview {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 65px;
+  margin-bottom: 28px;
+}
+.dataset-overview .split {
+  margin-top: 20px;
+}
+.dataset-overview .dataset-copy > p:last-child {
+  margin-bottom: 0;
+}
+.diversity-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 24px 17px;
+}
+.diversity-grid img {
+  border-radius: 4px;
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: contain;
+}
+.diversity-grid figcaption {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 12px;
+  margin-top: 8px;
+}
+.diversity-grid figcaption > span {
+  font-size: 11px;
+  color: var(--muted);
+}
+.diversity-grid .expand-hint {
+  position: absolute;
+  background: #fffffff2;
+  border: 0;
+  border-radius: 3px;
+  padding: 3px 6px;
+  bottom: 5px;
+  right: 5px;
+  margin: 0;
+  font-size: 10px;
+  opacity: 0;
+}
+.diversity-grid a:hover .expand-hint,
+.diversity-grid a:focus-visible .expand-hint {
+  opacity: 1;
+}
+.application-section {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 50px;
+  padding: 30px 0;
+  border-block: 1px solid var(--line);
+}
+.application-section h2 {
+  font-size: 23px;
+}
+.application-section p {
+  font-size: 14px;
+  color: var(--muted);
+  margin: 0 0 10px;
+}
+.application-section a {
+  font-size: 12px;
+}
+.contact-link {
+  display: block;
+  font-size: 12px;
+  text-decoration: none;
+}
+.contact-link span {
+  display: block;
+  text-decoration: underline;
+}
+.resources-section {
+  padding-top: 42px;
+}
+.view-stage figcaption > span:last-child {
+  text-align: right;
+}
+@media (max-width: 1050px) {
+  .scene-selector {
+    gap: 8px;
+  }
+  .scene-option span {
+    font-size: 11px;
+  }
+  .dataset-overview {
+    gap: 30px;
+  }
+  .diversity-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+@media (max-width: 760px) {
+  .hero-marks img {
+    height: 39px;
+  }
+  .hero-marks {
+    gap: 15px;
+  }
+  .masthead-top {
+    margin-bottom: 15px;
+  }
+  .masthead {
+    padding-top: 17px;
+  }
+  .speed-control {
+    gap: 8px;
+  }
+  .speed-control > span {
+    flex-basis: 100%;
+  }
+  .temporal-section {
+    padding: 0 0 30px;
+  }
+  .filmstrip {
+    display: flex;
+    overflow-x: auto;
+    gap: 12px;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 8px;
+  }
+  .time-frame {
+    flex: 0 0 78%;
+    scroll-snap-align: start;
+  }
+  .time-controls {
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .time-controls button {
+    font-size: 11px;
+    padding: 7px 8px;
+    min-height: 44px;
+  }
+  .time-slider {
+    min-width: 0;
+  }
+  .time-slider input {
+    height: 38px;
+  }
+  .time-slider label {
+    font-size: 11px;
+  }
+  .scene-selector {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 2px 2px 10px;
+    scroll-snap-type: x mandatory;
+  }
+  .scene-option {
+    flex: 0 0 124px;
+    scroll-snap-align: start;
+  }
+  .scene-option span {
+    font-size: 12px;
+  }
+  .scene-description {
+    font-size: 13px;
+    margin: 12px 0 19px;
+    min-height: 42px;
+  }
+  .dataset-overview {
+    display: block;
+    margin-bottom: 24px;
+  }
+  .dataset-overview .dataset-copy + .dataset-copy {
+    margin-top: 18px;
+  }
+  .diversity-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 12px;
+  }
+  .diversity-grid figcaption {
+    font-size: 11px;
+  }
+  .diversity-grid figcaption > span {
+    font-size: 10px;
+  }
+  .application-section {
+    display: block;
+    padding: 25px 0;
+  }
+  .application-section h2 {
+    font-size: 23px;
+    margin-bottom: 16px;
+  }
+  .application-section p {
+    font-size: 13px;
+  }
+  .view-stage figcaption {
+    font-size: 10px;
+  }
+  .resources-section {
+    padding-top: 30px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .filmstrip,
+  .scene-selector {
+    scroll-behavior: auto;
+  }
+}
