@@ -47,23 +47,23 @@
       "explore_views": "Explore the views",
       "see_results": "Explore motion",
       "cite": "Cite this work",
-      "video_alt": "Scene 0042: a person crossing the court, center camera C3 or 5×5 camera array",
+      "video_alt": "Scene 0042, 5 by 5 camera array or center-view video",
       "video_fallback": "Your browser can download the sample video.",
       "download_video": "Download video",
       "scene_label": "Scene 0042 / Court",
       "video_modes": "Video view",
       "center_view": "Center view",
       "array_view": "5×5 array",
-      "video_caption": "A 2.5-second excerpt, played at its original 59.94 fps. Center view or full 5×5 array.",
-      "motion_title": "Motion, at 60 fps",
-      "motion_description": "Dynamic light fields record how a scene changes over time and across viewpoints. Explore both dimensions in the samples below.",
+      "video_caption": "Scene 0042 · 150 standardized frames per camera · 59.94 fps. The array and center videos use the same frame sequence.",
+      "motion_title": "One scene, 25 viewpoints",
+      "motion_description": "See the same movement across the 5×5 camera array. Switch to the center camera for a closer view, then explore how foreground and background shift between viewpoints.",
       "stat_labels": [
         "Dynamic scenes",
         "Camera views",
         "Pixels per view",
         "Nominal fps"
       ],
-      "motion_note": "Play at the original rate or slow down to inspect the motion. The frame browser below retains the recorded temporal samples.",
+      "motion_note": "Original-speed video preserves the recorded motion. Explore parallax first, then examine the temporal detail below.",
       "explore_title": "Large parallax, across real scenes",
       "explore_intro": "Choose a scene, then change cameras while holding time fixed. Compare foreground displacement, occlusion and reflections.",
       "view": "View",
@@ -80,8 +80,8 @@
       "view_note": "Rows A–E, columns 1–5. C3 is the center view (v12). Every image shows the same frame index.",
       "image_error": "The image could not load. Select a camera to retry.",
       "sample_details_title": "Sample and playback details",
-      "sample_details": "Scene 0042 corresponds to Secondsyn/0030_seg02 (16.0–18.5 s in the source recording). The center video uses 150 standardized JPEG frames, resized to 1280×720. The existing array preview contains 149 decoded frames at 1920×1080 and retains its original camera labels, crop and color. Both are H.264 web encodes at the original 59.94 fps, without audio.",
-      "sample_timing": "The viewpoint explorer uses the same frame index across 25 cameras for each scene. Images are resized to 960×540 WebP without further cropping or color adjustment. Temporal alignment uses a clapperboard acoustic transient and nearest-frame trimming.",
+      "sample_details": "The 5×5 video combines all 25 standardized JPEG sequences from scene 0042, in row-major order A1–E5. Each camera contributes frames 1–150 at 60000/1001 fps. The center video uses the same C3 sequence. Web exports only resize and encode these processed frames.",
+      "sample_timing": "Viewpoint comparisons hold the frame index fixed at 91. Lightweight images appear inline; select an image to load its larger version.",
       "dataset_title": "A benchmark for real capture",
       "dataset_description": "RealDynLFV contains 45 dynamic sequences: 29 outdoor, 15 indoor and one mixed scene. The standardized sequences contain 9,031 temporal frames, each with 25 views.",
       "dataset_challenges": "Large angular displacement, occlusion and view-dependent appearance make sparse-view reconstruction challenging. The benchmark also captures geometric and photometric variation encountered with consumer cameras.",
@@ -100,7 +100,7 @@
         ],
         [
           "Temporal alignment",
-          "Estimate inter-camera offsets by cross-correlating the clapperboard's acoustic transient, then trim to a common start using the nearest frame."
+          "Use the center camera's clapperboard sound as reference, estimate each camera's offset by cross-correlation, and trim to a common start at the nearest frame."
         ],
         [
           "Standardize",
@@ -115,8 +115,7 @@
       "benchmark_intro": "The paper evaluates an existing sparse-view LFV coding framework on RealDynLFV, using the fixed 32/5/8 split. Four encoded corner views are used to reconstruct all 25 views. This provides a practical evaluation setting for studying LFV reconstruction and compression.",
       "resources_title": "Resources",
       "release_text": "This page provides an interactive sample from RealDynLFV. The full dataset is planned for public release after acceptance of the journal extension.",
-      "sample_download": "Download array demo",
-      "repository": "Homepage source",
+      "sample_download": "Download 5×5 sample (HD)",
       "contact": "Xinpeng Huang (corresponding author)",
       "citation_title": "Citation",
       "copy": "Copy BibTeX",
@@ -137,17 +136,27 @@
       "slow_speed": "0.25× Slow motion",
       "speed_note": "Slow playback uses the recorded frames without interpolation.",
       "time_title": "Follow the motion, frame by frame",
-      "time_intro": "150 recorded frames from camera C3. At 59.94 fps (nominal 60 fps), consecutive frames are 16.68 ms apart.",
+      "time_intro": "30 consecutive recorded frames, 76–105, at 59.94 fps (nominal 60 fps). A fixed crop highlights foot motion; neighboring frames are 16.68 ms apart.",
       "time_slider": "Recorded frame",
       "previous_frame": "Previous frame",
       "next_frame": "Next frame",
-      "time_note": "Scene 0042. Three consecutive frames; drag the slider to move through the clip. Select an image to enlarge it.",
+      "time_note": "Scene 0042, camera C3. Drag or step through the original frame indices. Each group contains three consecutive frames.",
       "frame_word": "Frame",
       "time_word": "Time",
-      "time_alt": "Scene 0042, camera C3, recorded frame",
+      "time_alt": "Scene 0042, C3, fixed crop of recorded frame",
       "scene_selection": "Choose a scene",
       "selected_scene_description": "A person passing close to the camera array.",
-      "more_motion": "Movement across different scenes"
+      "more_motion": "Movement across different scenes",
+      "comparison_title": "Same frame, different viewpoints",
+      "comparison_note": "C1 and C5 at frame 91. Follow the foreground displacement against the background.",
+      "capture_title": "A real 5×5 camera array",
+      "capture_description": "25 action cameras, with nominal 80 mm spacing, capture source video at 4K/60 fps. This photograph shows the acquisition array used for RealDynLFV.",
+      "capture_alt": "The physical RealDynLFV 5 by 5 action-camera array, shown in paper Figure 1(a)",
+      "teacher_page": "Xinpeng Huang — faculty profile",
+      "loading": "Loading…",
+      "loading_hd": "Loading larger image…",
+      "replay": "Replay",
+      "video_loading": "Loading video…"
     },
     "zh": {
       "page_title": "RealDynLFV | VCIP 2026",
@@ -163,23 +172,23 @@
       "explore_views": "探索不同视角",
       "see_results": "观察连续运动",
       "cite": "引用本文",
-      "video_alt": "场景 0042：人物跑过球场，中心相机 C3 或 5×5 相机阵列",
+      "video_alt": "场景0042的5×5相机阵列或中心视角视频",
       "video_fallback": "可下载样例视频观看。",
       "download_video": "下载视频",
       "scene_label": "场景 0042 / 球场",
       "video_modes": "视频视角",
       "center_view": "中心视角",
       "array_view": "5×5 阵列",
-      "video_caption": "约 2.5 秒片段，按原始 59.94 fps 播放。可切换中心视角与完整 5×5 阵列。",
-      "motion_title": "60 fps 的连续运动",
-      "motion_description": "动态光场记录场景随时间和观察视角的变化。下方样例分别展示这两个维度。",
+      "video_caption": "场景0042 · 每台相机150帧标准化图像 · 59.94 fps。阵列与中心视频使用同一组帧序列。",
+      "motion_title": "一个动态场景，25个视角",
+      "motion_description": "在5×5相机阵列中观察同一段运动，也可切换到中心相机查看细节，再探索前景与背景随视点变化的位置关系。",
       "stat_labels": [
         "动态场景",
         "相机视角",
         "单视角分辨率",
         "标称帧率"
       ],
-      "motion_note": "可按原速播放或慢放观察动作，下方逐帧浏览保留实际记录的时间采样。",
+      "motion_note": "原速视频保留实拍运动。先观察大视差，再向下查看连续帧中的时间细节。",
       "explore_title": "在真实场景中观察大视差",
       "explore_intro": "先选择场景，再固定时间切换相机，观察前景位移、遮挡与反射的变化。",
       "view": "视角",
@@ -196,8 +205,8 @@
       "view_note": "行号 A–E，列号 1–5。C3 为中心视角（v12），所有图片使用相同帧编号。",
       "image_error": "图片加载失败，请重新选择相机。",
       "sample_details_title": "样例与播放说明",
-      "sample_details": "场景 0042 对应 Secondsyn/0030_seg02（源视频 16.0–18.5 秒）。中心视频采用 150 张标准化 JPEG，缩放至 1280×720；现有阵列预览含 149 个解码帧，分辨率为 1920×1080，保留原相机标注、裁剪和色彩。两者均以原始 59.94 fps 转码为 H.264 网页视频，不含音轨。",
-      "sample_timing": "视角交互对每个场景使用全部 25 台相机的相同帧编号。图片缩放为 960×540 WebP，无额外裁剪或调色；时间对齐基于场记板瞬态声学标记与最近帧裁剪。",
+      "sample_details": "5×5视频直接由场景0042的25路标准化JPEG序列合成，机位按A1–E5逐行排列。每台相机采用第1–150帧，帧率为60000/1001 fps；中心视频使用同一组C3序列。网页导出仅缩放与编码这些处理后的图像。",
+      "sample_timing": "视角对比固定为第91帧。页面使用轻量展示图，点击图片再加载清晰版本。",
       "dataset_title": "面向真实采集的基准",
       "dataset_description": "RealDynLFV 包含 45 个动态序列：29 个室外、15 个室内及 1 个室内外混合场景。标准化序列共含 9,031 个时间帧，每帧包含 25 个视角。",
       "dataset_challenges": "大视差、遮挡和随视角变化的外观为稀疏视角重建带来挑战。数据也保留了消费级多相机采集中出现的几何与光度差异。",
@@ -216,7 +225,7 @@
         ],
         [
           "声学时间对齐",
-          "利用场记板瞬态声学标记，通过互相关估计相机间时间偏移，再按最近帧裁剪至共同起点。"
+          "以中心相机的场记板合板声为参考，通过互相关估计各机时间偏移，并按最近帧裁剪至共同起点。"
         ],
         [
           "标准化",
@@ -231,8 +240,7 @@
       "benchmark_intro": "论文已在 RealDynLFV 上运行现有稀疏视角光场视频编码框架，采用固定的 32/5/8 划分，由四个编码角视图重建完整 25 视角，为光场视频重建与压缩研究提供实际评测场景。",
       "resources_title": "项目资源",
       "release_text": "本页提供 RealDynLFV 交互样例。完整数据集计划在期刊扩展稿录用后公开。",
-      "sample_download": "下载阵列演示视频",
-      "repository": "主页源码",
+      "sample_download": "下载5×5样例（清晰版）",
       "contact": "Xinpeng Huang（通讯作者）",
       "citation_title": "引用",
       "copy": "复制 BibTeX",
@@ -253,17 +261,27 @@
       "slow_speed": "0.25× 慢放",
       "speed_note": "慢放使用实拍帧，不做插帧。",
       "time_title": "逐帧观察运动",
-      "time_intro": "中心相机 C3 的 150 个实拍帧。记录帧率为 59.94 fps（标称 60 fps），相邻帧间隔约 16.68 毫秒。",
+      "time_intro": "第76–105帧，共30个连续实拍帧。记录帧率59.94 fps（标称60 fps），相邻帧间隔约16.68毫秒；固定局部展示腿脚运动。",
       "time_slider": "实拍帧",
       "previous_frame": "上一帧",
       "next_frame": "下一帧",
-      "time_note": "场景 0042。每组展示连续三帧，拖动滑块浏览整个片段，点击图片可放大。",
+      "time_note": "场景0042，中心相机C3。拖动滑块或逐帧前后浏览，保留原始帧编号；每组展示连续三帧。",
       "frame_word": "第",
       "time_word": "时间",
-      "time_alt": "场景 0042，中心相机 C3，实拍帧",
+      "time_alt": "场景0042，中心相机C3，实拍帧的固定局部",
       "scene_selection": "选择场景",
       "selected_scene_description": "人物从相机阵列近处经过。",
-      "more_motion": "不同场景中的真实运动"
+      "more_motion": "不同场景中的真实运动",
+      "comparison_title": "同一帧，不同视点",
+      "comparison_note": "第91帧的C1与C5。观察前景相对背景的位置变化。",
+      "capture_title": "真实的5×5相机阵列",
+      "capture_description": "25台运动相机，标称间距80 mm，原始视频以4K/60 fps采集。图中为RealDynLFV实际使用的采集阵列。",
+      "capture_alt": "RealDynLFV真实5×5运动相机阵列，对应论文图1(a)",
+      "teacher_page": "黄新彭老师介绍",
+      "loading": "正在加载…",
+      "loading_hd": "正在加载清晰图…",
+      "replay": "重新播放",
+      "video_loading": "正在加载视频…"
     }
   },
   "scenes": [
@@ -279,8 +297,9 @@
         "en": "A person crosses close to the array. Follow the foreground shift against the distant court.",
         "zh": "人物从阵列近处经过，观察前景相对远处球场的位移。"
       },
-      "thumb": "assets/media/scene0042-poster.webp",
-      "prefix": "assets/media/scene0042-view-"
+      "thumb": "assets/media/scenes/0042/thumb.webp",
+      "prefix": "assets/media/scenes/0042/view-",
+      "hd_prefix": "assets/media/scenes/0042/hd/view-"
     },
     {
       "id": "0001",
@@ -295,7 +314,8 @@
       },
       "thumb": "assets/media/scenes/0001/thumb.webp",
       "fps": 59.94,
-      "prefix": "assets/media/scenes/0001/view-"
+      "prefix": "assets/media/scenes/0001/view-",
+      "hd_prefix": "assets/media/scenes/0001/hd/view-"
     },
     {
       "id": "0021",
@@ -310,7 +330,8 @@
       },
       "thumb": "assets/media/scenes/0021/thumb.webp",
       "fps": 59.94,
-      "prefix": "assets/media/scenes/0021/view-"
+      "prefix": "assets/media/scenes/0021/view-",
+      "hd_prefix": "assets/media/scenes/0021/hd/view-"
     },
     {
       "id": "0025",
@@ -325,7 +346,8 @@
       },
       "thumb": "assets/media/scenes/0025/thumb.webp",
       "fps": 59.94,
-      "prefix": "assets/media/scenes/0025/view-"
+      "prefix": "assets/media/scenes/0025/view-",
+      "hd_prefix": "assets/media/scenes/0025/hd/view-"
     },
     {
       "id": "0030",
@@ -340,7 +362,8 @@
       },
       "thumb": "assets/media/scenes/0030/thumb.webp",
       "fps": 59.94,
-      "prefix": "assets/media/scenes/0030/view-"
+      "prefix": "assets/media/scenes/0030/view-",
+      "hd_prefix": "assets/media/scenes/0030/hd/view-"
     },
     {
       "id": "0044",
@@ -355,7 +378,8 @@
       },
       "thumb": "assets/media/scenes/0044/thumb.webp",
       "fps": 59.94,
-      "prefix": "assets/media/scenes/0044/view-"
+      "prefix": "assets/media/scenes/0044/view-",
+      "hd_prefix": "assets/media/scenes/0044/hd/view-"
     }
   ],
   "diversity": [
@@ -370,7 +394,8 @@
         "en": "Scene 0001 · center view C3 · frame 91.",
         "zh": "场景 0001 · 中心视角 C3 · 第 91 帧。"
       },
-      "src": "assets/media/diversity/0001.webp"
+      "src": "assets/media/diversity/0001.webp",
+      "hd": "assets/media/diversity/hd/0001.webp"
     },
     {
       "id": "0003",
@@ -383,7 +408,8 @@
         "en": "Scene 0003 · center view C3 · frame 61.",
         "zh": "场景 0003 · 中心视角 C3 · 第 61 帧。"
       },
-      "src": "assets/media/diversity/0003.webp"
+      "src": "assets/media/diversity/0003.webp",
+      "hd": "assets/media/diversity/hd/0003.webp"
     },
     {
       "id": "0004",
@@ -396,7 +422,8 @@
         "en": "Scene 0004 · center view C3 · frame 91.",
         "zh": "场景 0004 · 中心视角 C3 · 第 91 帧。"
       },
-      "src": "assets/media/diversity/0004.webp"
+      "src": "assets/media/diversity/0004.webp",
+      "hd": "assets/media/diversity/hd/0004.webp"
     },
     {
       "id": "0009",
@@ -409,7 +436,8 @@
         "en": "Scene 0009 · center view C3 · frame 121.",
         "zh": "场景 0009 · 中心视角 C3 · 第 121 帧。"
       },
-      "src": "assets/media/diversity/0009.webp"
+      "src": "assets/media/diversity/0009.webp",
+      "hd": "assets/media/diversity/hd/0009.webp"
     },
     {
       "id": "0016",
@@ -422,7 +450,8 @@
         "en": "Scene 0016 · center view C3 · frame 91.",
         "zh": "场景 0016 · 中心视角 C3 · 第 91 帧。"
       },
-      "src": "assets/media/diversity/0016.webp"
+      "src": "assets/media/diversity/0016.webp",
+      "hd": "assets/media/diversity/hd/0016.webp"
     },
     {
       "id": "0019",
@@ -435,7 +464,8 @@
         "en": "Scene 0019 · center view C3 · frame 91.",
         "zh": "场景 0019 · 中心视角 C3 · 第 91 帧。"
       },
-      "src": "assets/media/diversity/0019.webp"
+      "src": "assets/media/diversity/0019.webp",
+      "hd": "assets/media/diversity/hd/0019.webp"
     },
     {
       "id": "0021",
@@ -448,7 +478,8 @@
         "en": "Scene 0021 · center view C3 · frame 91.",
         "zh": "场景 0021 · 中心视角 C3 · 第 91 帧。"
       },
-      "src": "assets/media/diversity/0021.webp"
+      "src": "assets/media/diversity/0021.webp",
+      "hd": "assets/media/diversity/hd/0021.webp"
     },
     {
       "id": "0023",
@@ -461,7 +492,8 @@
         "en": "Scene 0023 · center view C3 · frame 91.",
         "zh": "场景 0023 · 中心视角 C3 · 第 91 帧。"
       },
-      "src": "assets/media/diversity/0023.webp"
+      "src": "assets/media/diversity/0023.webp",
+      "hd": "assets/media/diversity/hd/0023.webp"
     },
     {
       "id": "0024",
@@ -474,7 +506,8 @@
         "en": "Scene 0024 · center view C3 · frame 91.",
         "zh": "场景 0024 · 中心视角 C3 · 第 91 帧。"
       },
-      "src": "assets/media/diversity/0024.webp"
+      "src": "assets/media/diversity/0024.webp",
+      "hd": "assets/media/diversity/hd/0024.webp"
     },
     {
       "id": "0025",
@@ -487,7 +520,8 @@
         "en": "Scene 0025 · center view C3 · frame 91.",
         "zh": "场景 0025 · 中心视角 C3 · 第 91 帧。"
       },
-      "src": "assets/media/diversity/0025.webp"
+      "src": "assets/media/diversity/0025.webp",
+      "hd": "assets/media/diversity/hd/0025.webp"
     },
     {
       "id": "0028",
@@ -500,7 +534,8 @@
         "en": "Scene 0028 · center view C3 · frame 91.",
         "zh": "场景 0028 · 中心视角 C3 · 第 91 帧。"
       },
-      "src": "assets/media/diversity/0028.webp"
+      "src": "assets/media/diversity/0028.webp",
+      "hd": "assets/media/diversity/hd/0028.webp"
     },
     {
       "id": "0030",
@@ -513,7 +548,8 @@
         "en": "Scene 0030 · center view C3 · frame 91.",
         "zh": "场景 0030 · 中心视角 C3 · 第 91 帧。"
       },
-      "src": "assets/media/diversity/0030.webp"
+      "src": "assets/media/diversity/0030.webp",
+      "hd": "assets/media/diversity/hd/0030.webp"
     },
     {
       "id": "0034",
@@ -526,7 +562,8 @@
         "en": "Scene 0034 · center view C3 · frame 91.",
         "zh": "场景 0034 · 中心视角 C3 · 第 91 帧。"
       },
-      "src": "assets/media/diversity/0034.webp"
+      "src": "assets/media/diversity/0034.webp",
+      "hd": "assets/media/diversity/hd/0034.webp"
     },
     {
       "id": "0042",
@@ -539,7 +576,8 @@
         "en": "Scene 0042 · center view C3 · frame 91.",
         "zh": "场景 0042 · 中心视角 C3 · 第 91 帧。"
       },
-      "src": "assets/media/diversity/0042.webp"
+      "src": "assets/media/diversity/0042.webp",
+      "hd": "assets/media/diversity/hd/0042.webp"
     },
     {
       "id": "0045",
@@ -552,7 +590,8 @@
         "en": "Scene 0045 · center view C3 · frame 91.",
         "zh": "场景 0045 · 中心视角 C3 · 第 91 帧。"
       },
-      "src": "assets/media/diversity/0045.webp"
+      "src": "assets/media/diversity/0045.webp",
+      "hd": "assets/media/diversity/hd/0045.webp"
     }
   ],
   "motions": [
@@ -582,5 +621,18 @@
       "src": "assets/media/scene0044-center.mp4",
       "poster": "assets/media/scene0044-poster.webp"
     }
-  ]
+  ],
+  "temporal": {
+    "start": 76,
+    "end": 105,
+    "initial": 91,
+    "fps_numerator": 60000,
+    "fps_denominator": 1001,
+    "crop": [
+      200,
+      180,
+      1280,
+      720
+    ]
+  }
 }

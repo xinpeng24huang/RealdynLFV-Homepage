@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 class Page(HTMLParser):
     def __init__(self):
         super().__init__()
-        self.ids, self.refs, self.images, self.buttons = [], [], [], []
+        self.ids, self.refs, self.images, self.buttons, self.videos = [], [], [], [], []
         self.h1 = 0
         self.lang = None
 
@@ -24,11 +24,13 @@ class Page(HTMLParser):
             self.lang = a.get('lang')
         if tag == 'h1':
             self.h1 += 1
-        for key in ['href', 'src', 'poster']:
+        for key in ['href', 'src', 'poster', 'data-src', 'data-poster']:
             if a.get(key):
                 self.refs.append(a[key])
         if tag == 'img':
             self.images.append(a)
+        if tag == 'video':
+            self.videos.append(a)
         if 'data-view' in a:
             self.buttons.append(a)
 
@@ -65,17 +67,31 @@ def main():
         pages.append(p)
         assert len(re.findall(r'data-scene="', text)) == 6
         assert text.count('class="motion-clip"') == 2
+        assert len(p.videos) == 3 and all('loop' not in v and 'autoplay' not in v for v in p.videos)
+        assert p.videos[0]['poster'].endswith('scene0042-grid-poster.webp')
+        assert '<source src="assets/media/scene0042-grid.mp4"' in text
+        assert text.index('id="explore"') < text.index('id="time"') < text.index('id="dataset"')
+        assert all('/hd/' not in (im.get('src','') + im.get('data-src','')) for im in p.images)
+        assert 'Homepage source' not in text and 'https://github.com/' not in text
+        assert text.count('href="https://www.shu.edu.cn/"') == 2
+        assert text.count('href="https://scie-ie.shu.edu.cn/info/1078/1184.htm"') == 2
         assert '<div class="gains">' not in text and 'benchmark-rd.webp' not in text
         assert 'audio-clap' not in text and 'clap signal' not in text and '拍手' not in text
-        print(f'{filename}: current build, resources, 6 scenes, 25 views, temporal browser, logos and language PASS')
+        print(f'{filename}: build, resources, section order, grid default, 6 scenes, lazy HD and video controls PASS')
     assert pages[0].ids == pages[1].ids, 'Languages have different sections'
     for i in range(25):
         assert (ROOT/f'assets/media/scene0042-view-{i:02}.webp').is_file()
     for scene in c['scenes']:
         for i in range(25):
             assert (ROOT/f'{scene["prefix"]}{i:02}.webp').is_file()
-    for i in range(1,151):
+            assert (ROOT/f'{scene["hd_prefix"]}{i:02}.webp').is_file()
+    temporal = c['temporal']
+    assert temporal['end'] - temporal['start'] + 1 == 30
+    expected = {f'frame-{i:03}.webp' for i in range(temporal['start'], temporal['end']+1)}
+    assert {p.name for p in (ROOT/'assets/media/time0042').glob('*.webp')} == expected
+    for i in range(temporal['start'],temporal['end']+1):
         assert (ROOT/f'assets/media/time0042/frame-{i:03}.webp').is_file()
+        assert (ROOT/f'assets/media/time0042/hd/frame-{i:03}.webp').is_file()
     assert len(c['diversity']) == 15
     for filename in ['scene0042-center.mp4', 'scene0042-grid.mp4', 'scene0042-grid-poster.webp']:
         assert (ROOT/'assets/media'/filename).is_file()

@@ -26,26 +26,34 @@ def render(c, locale):
     values['steps_html'] = ''.join(f'<li><h3>{e(s[0])}</h3><p>{e(s[1])}</p></li>' for s in text['steps'])
     values['scene_selector_html'] = ''.join(
         f'<button type="button" class="scene-option" data-scene="{e(s["id"])}" '
-        f'data-prefix="{e(s["prefix"])}" data-name="{e(s["name"][locale])}" '
+        f'data-prefix="{e(s["prefix"])}" data-hd-prefix="{e(s["hd_prefix"])}" data-name="{e(s["name"][locale])}" '
         f'data-hint="{e(s["hint"][locale])}" data-frame="{s["frame"]}" '
         f'data-time="{(s["frame"]-1)/s["fps"]:.3f}" '
-        f'aria-pressed="{str(i==0).lower()}"><img src="{e(s["thumb"])}" '
-        f'width="480" height="270" alt="" loading="lazy"><span>{e(s["name"][locale])}</span><small>{e(s["id"])}</small></button>'
+        f'aria-pressed="{str(i==0).lower()}"><img data-src="{e(s["thumb"])}" '
+        f'width="320" height="180" alt="" decoding="async"><span>{e(s["name"][locale])}</span><small>{e(s["id"])}</small></button>'
         for i,s in enumerate(c['scenes']))
     values['diversity_html'] = ''.join(
-        f'<figure><a href="{e(s["src"])}" class="image-preview" data-image-preview>'
-        f'<img src="{e(s["src"])}" width="640" height="360" alt="{e(s["name"][locale]+". "+s["caption"][locale])}" loading="lazy" decoding="async">'
+        f'<figure><a href="{e(s["hd"])}" class="image-preview" data-image-preview>'
+        f'<img data-src="{e(s["src"])}" width="480" height="270" alt="{e(s["name"][locale]+". "+s["caption"][locale])}" decoding="async">'
         f'<span class="expand-hint">{e(text["enlarge"])}</span></a><figcaption>{e(s["name"][locale])}<span>{e(s["id"])}</span></figcaption></figure>'
         for s in c['diversity'])
     frame_caption = lambda n: f'第 {n} 帧' if locale == 'zh' else f'Frame {n}'
+    temporal = c['temporal']
+    fps = temporal['fps_numerator'] / temporal['fps_denominator']
+    values.update(time_start=temporal['start'], time_end=temporal['end'], time_initial=temporal['initial'], time_fps=fps)
     values['temporal_html'] = ''.join(
-        f'<figure class="time-frame" data-time-card="{i}" data-selected="{str(n==91).lower()}"><a class="image-preview" href="assets/media/time0042/frame-{n:03}.webp" data-image-preview>'
-        f'<img src="assets/media/time0042/frame-{n:03}.webp" alt="{e(text["time_alt"])} {n}" width="960" height="540" loading="lazy" decoding="async"><span class="expand-hint">{e(text["enlarge"])}</span></a>'
-        f'<figcaption><span>{e(frame_caption(n))}</span><span>{(n-1)*1001/60000:.3f} s</span></figcaption></figure>'
-        for i,n in enumerate([90,91,92]))
+        f'<figure class="time-frame" data-time-card="{i}" data-selected="{str(n==temporal["initial"]).lower()}"><a class="image-preview" href="assets/media/time0042/hd/frame-{n:03}.webp" data-image-preview>'
+        f'<img data-src="assets/media/time0042/frame-{n:03}.webp" alt="{e(text["time_alt"])} {n}" width="640" height="360" decoding="async"><span class="expand-hint">{e(text["enlarge"])}</span></a>'
+        f'<figcaption><span>{e(frame_caption(n))}</span><span>{(n-1)/fps:.6f} s</span></figcaption></figure>'
+        for i,n in enumerate(range(temporal['initial']-1, temporal['initial']+2)))
+    values['comparison_html'] = ''.join(
+        f'<figure><a class="image-preview" data-image-preview href="assets/media/scenes/0042/hd/view-{n:02}.webp">'
+        f'<img data-src="assets/media/scenes/0042/view-{n:02}.webp" width="640" height="360" alt="0042, {e(frame_caption(91))}, C{n-9}" decoding="async"><span class="expand-hint">{e(text["enlarge"])}</span></a>'
+        f'<figcaption>0042 · {e(frame_caption(91))} · <strong>C{n-9}</strong></figcaption></figure>' for n in (10,14))
     values['motion_clips_html'] = ''.join(
         f'<article class="motion-clip"><h4>{e(s["name"][locale])}<span>{e(s["id"])}</span></h4>'
-        f'<video controls playsinline muted loop preload="none" poster="{e(s["poster"])}" width="1280" height="720" aria-label="{e(s["name"][locale])}"><source src="{e(s["src"])}" type="video/mp4"></video>'
+        f'<div class="video-stage"><video controls playsinline muted preload="none" data-poster="{e(s["poster"])}" width="960" height="540" aria-label="{e(s["name"][locale])}"><source data-src="{e(s["src"])}" type="video/mp4"></video>'
+        f'<button class="play-video" type="button" data-play-video data-play="{e(text["play_video"])}" data-replay="{e(text["replay"])}" data-loading="{e(text["video_loading"])}" hidden>{e(text["play_video"])}</button></div>'
         f'<p class="caption">{e(s["caption"][locale])}</p><div class="speed-control"><label for="clip-speed-{e(s["id"])}">{e(text["speed_label"])}</label>'
         f'<select id="clip-speed-{e(s["id"])}" class="clip-speed"><option value="1">{e(text["normal_speed"])}</option><option value="0.25">{e(text["slow_speed"])}</option></select></div></article>'
         for s in c['motions'])

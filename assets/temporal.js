@@ -6,64 +6,90 @@
   const previous = document.querySelector("#previous-frame");
   const next = document.querySelector("#next-frame");
   const error = document.querySelector("#time-error");
+  const loading = section.querySelector(".temporal-loading");
+  const strip = section.querySelector(".filmstrip");
+  const pool = RealDynMedia.imagePool(12, 3);
+  const first = Number(section.dataset.start),
+    last = Number(section.dataset.end),
+    fps = Number(section.dataset.fps);
+  const isZh = document.documentElement.lang.startsWith("zh");
   let sequence = 0,
     timer;
+  const path = (n) =>
+    `assets/media/time0042/frame-${String(n).padStart(3, "0")}.webp`;
+  const caption = (n) => (isZh ? `第 ${n} 帧` : `Frame ${n}`);
+  const time = (n) => ((n - 1) / fps).toFixed(6);
+  function prefetch(frame) {
+    const around = [
+      frame,
+      frame - 1,
+      frame + 1,
+      frame - 2,
+      frame + 2,
+      frame - 3,
+      frame + 3,
+    ].filter((n) => n >= first && n <= last);
+    pool.prefetch(around.map(path));
+  }
   function centerSelected() {
     if (!matchMedia("(max-width:760px)").matches) return;
-    const strip = section.querySelector(".filmstrip");
     const card = section.querySelector('[data-selected="true"]');
-    const a = strip.getBoundingClientRect(),
-      b = card.getBoundingClientRect();
-    strip.scrollLeft += b.left - a.left - (a.width - b.width) / 2;
+    strip.scrollLeft +=
+      card.getBoundingClientRect().left - strip.getBoundingClientRect().left;
+  }
+  function indicate(frame) {
+    range.value = frame;
+    output.textContent = `${frame} / ${last}`;
+    range.setAttribute("aria-valuetext", `${caption(frame)}, ${time(frame)} s`);
+    previous.disabled = frame === first;
+    next.disabled = frame === last;
+    strip.setAttribute("aria-busy", "true");
+    loading.hidden = false;
   }
   async function showFrame(value) {
-    const frame = Math.max(1, Math.min(150, value));
-    range.value = frame;
-    const start = Math.max(1, Math.min(148, frame - 1));
+    const frame = Math.max(first, Math.min(last, value));
+    indicate(frame);
+    const start = Math.max(first, Math.min(last - 2, frame - 1));
     const request = ++sequence;
-    const items = [start, start + 1, start + 2].map((n) => {
-      const image = new Image();
-      const src = `assets/media/time0042/frame-${String(n).padStart(3, "0")}.webp`;
-      image.src = src;
-      return { n, image, src };
-    });
+    const indexes = [start, start + 1, start + 2];
     try {
-      await Promise.all(items.map((i) => i.image.decode()));
+      pool.setDemand(indexes.map(path));
+      await Promise.all(indexes.map((n) => pool.load(path(n))));
     } catch (_) {
-      if (request === sequence) error.textContent = section.dataset.error;
+      if (request === sequence) {
+        error.textContent = section.dataset.error;
+        loading.hidden = true;
+        strip.setAttribute("aria-busy", "false");
+      }
       return;
     }
     if (request !== sequence) return;
     error.textContent = "";
     cards.forEach((card, i) => {
-      const { n, src } = items[i],
+      const n = indexes[i],
         image = card.querySelector("img");
-      image.src = src;
+      image.removeAttribute("data-src");
+      image.src = path(n);
       image.alt = `${section.dataset.alt} ${n}`;
-      card.querySelector("a").href = src;
+      card.querySelector("a").href =
+        `assets/media/time0042/hd/frame-${String(n).padStart(3, "0")}.webp`;
       const captions = card.querySelectorAll("figcaption span");
-      captions[0].textContent = document.documentElement.lang.startsWith("zh")
-        ? `第 ${n} 帧`
-        : `Frame ${n}`;
-      captions[1].textContent = `${(((n - 1) * 1001) / 60000).toFixed(3)} s`;
+      captions[0].textContent = caption(n);
+      captions[1].textContent = `${time(n)} s`;
       card.dataset.selected = String(n === frame);
     });
-    range.value = frame;
     section.dataset.frame = frame;
-    output.textContent = `${frame} / 150`;
-    range.setAttribute(
-      "aria-valuetext",
-      `${section.dataset.frameWord} ${frame}, ${(((frame - 1) * 1001) / 60000).toFixed(3)} s`,
-    );
-    previous.disabled = frame === 1;
-    next.disabled = frame === 150;
+    strip.setAttribute("aria-busy", "false");
+    loading.hidden = true;
     centerSelected();
+    prefetch(frame);
   }
   range.addEventListener("input", () => {
     clearTimeout(timer);
     sequence++;
     const value = Number(range.value);
-    timer = setTimeout(() => showFrame(value), 60);
+    indicate(value);
+    timer = setTimeout(() => showFrame(value), 50);
   });
   previous.addEventListener("click", () => {
     clearTimeout(timer);
@@ -73,15 +99,7 @@
     clearTimeout(timer);
     showFrame(Number(range.value) + 1);
   });
-  section.dataset.frame = "91";
+  section.dataset.frame = section.dataset.initial;
   centerSelected();
-  document.querySelectorAll(".motion-clip").forEach((clip) => {
-    const video = clip.querySelector("video");
-    const speed = clip.querySelector(".clip-speed");
-    const applySpeed = () => {
-      video.playbackRate = Number(speed.value);
-    };
-    speed.addEventListener("change", applySpeed);
-    video.addEventListener("loadedmetadata", applySpeed);
-  });
+  RealDynMedia.near([strip], () => prefetch(Number(range.value)));
 })();
