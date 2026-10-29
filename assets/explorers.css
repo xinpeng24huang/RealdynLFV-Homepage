@@ -1,25 +1,4 @@
 /* Temporal sampling, scene selection and dataset coverage. */
-.parallax-comparison {
-  margin-bottom: 26px;
-}
-.parallax-comparison > .caption {
-  margin: 8px 0 14px;
-}
-.parallax-pair {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
-}
-.parallax-pair img {
-  aspect-ratio: 16 / 9;
-  width: 100%;
-  border-radius: 6px;
-}
-.parallax-pair figcaption {
-  font-size: 12px;
-  padding-top: 6px;
-  color: var(--muted);
-}
 .view-stage {
   position: relative;
 }
@@ -103,12 +82,6 @@ img[data-src] {
   .video-modes button {
     flex: 1;
     font-size: 13px;
-  }
-  .parallax-pair {
-    gap: 10px;
-  }
-  .parallax-pair figcaption {
-    font-size: 10px;
   }
   .capture-array {
     grid-template-columns: 1fr;

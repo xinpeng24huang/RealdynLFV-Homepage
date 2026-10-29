@@ -46,10 +46,6 @@ def render(c, locale):
         f'<img data-src="assets/media/time0042/frame-{n:03}.webp" alt="{e(text["time_alt"])} {n}" width="640" height="360" decoding="async"><span class="expand-hint">{e(text["enlarge"])}</span></a>'
         f'<figcaption><span>{e(frame_caption(n))}</span><span>{(n-1)/fps:.6f} s</span></figcaption></figure>'
         for i,n in enumerate(range(temporal['initial']-1, temporal['initial']+2)))
-    values['comparison_html'] = ''.join(
-        f'<figure><a class="image-preview" data-image-preview href="assets/media/scenes/0042/hd/view-{n:02}.webp">'
-        f'<img data-src="assets/media/scenes/0042/view-{n:02}.webp" width="640" height="360" alt="0042, {e(frame_caption(91))}, C{n-9}" decoding="async"><span class="expand-hint">{e(text["enlarge"])}</span></a>'
-        f'<figcaption>0042 · {e(frame_caption(91))} · <strong>C{n-9}</strong></figcaption></figure>' for n in (10,14))
     values['motion_clips_html'] = ''.join(
         f'<article class="motion-clip"><h4>{e(s["name"][locale])}<span>{e(s["id"])}</span></h4>'
         f'<div class="video-stage"><video controls playsinline muted preload="none" data-poster="{e(s["poster"])}" width="960" height="540" aria-label="{e(s["name"][locale])}"><source data-src="{e(s["src"])}" type="video/mp4"></video>'

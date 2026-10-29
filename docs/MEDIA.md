@@ -18,7 +18,7 @@ The new array video replaces the earlier preview made from `Grid_0030_seg02.mp4`
 
 ## Viewpoints, comparisons and scene coverage
 
-The six interactive scenes are 0042, 0001, 0021, 0025, 0030 and 0044. They all use frame 91 and the camera mapping above. The same-frame comparison shows C1 and C5 of scene 0042.
+The six interactive scenes are 0042, 0001, 0021, 0025, 0030 and 0044. They all use frame 91 and the camera mapping above. Viewpoint selection and horizontal sweeping compare cameras at a fixed time within the selected scene.
 
 - `scenes/{id}/view-{00..24}.webp`: lightweight 640×360 images.
 - `scenes/{id}/hd/view-{00..24}.webp`: 960×540 versions, requested only when enlarged.
