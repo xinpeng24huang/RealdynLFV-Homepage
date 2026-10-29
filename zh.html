@@ -1,10 +1,109 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>RealDynLFV — 动态光场视频</title><meta name="description" content="RealDynLFV：面向真实世界动态光场视频的大视差基准。已获 IEEE VCIP 2026 接收，资源准备中。"><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/style.css"><script src="assets/language.js" defer></script><script src="assets/gallery.js" defer></script></head>
-<body><a class="skip" href="#main">跳至正文</a><header><a class="brand" href="#top">RealDynLFV</a><nav aria-label="主导航"><a href="#overview">概述</a><a href="#benchmark">基准评测</a><a href="#gallery">示例展示</a><a href="#resources">资源</a></nav><a class="language-switch" href="index.html" lang="en" hreflang="en" data-language="en">EN</a></header>
-<!-- Hierarchy: value and verified specifications first; research and evaluation second;
-     absent media and publication logistics third. One primary action. §2.1 §2.4 §3.6 -->
-<main id="main" tabindex="-1"><section class="hero" id="top"><div class="hero-layout"><div class="hero-copy"><p class="eyebrow">IEEE VCIP 2026 <span class="accepted">已接收</span></p><h1>RealDynLFV</h1><p class="value-statement">面向真实世界动态光场视频的大视差基准。</p><p class="paper-title">A Large-Parallax Benchmark for Real-World Dynamic Light Field Video</p><a class="primary" href="#overview">了解基准数据集<span aria-hidden="true">&rarr;</span></a></div><figure class="hero-visual"><div class="view-array" aria-hidden="true"><span class="view "></span><span class="view "></span><span class="view "></span><span class="view "></span><span class="view "></span><span class="view "></span><span class="view "></span><span class="view "></span><span class="view "></span><span class="view "></span><span class="view "></span><span class="view "></span><span class="view center">中心</span><span class="view "></span><span class="view "></span><span class="view "></span><span class="view "></span><span class="view "></span><span class="view "></span><span class="view "></span><span class="view "></span><span class="view "></span><span class="view "></span><span class="view "></span><span class="view "></span></div><figcaption><strong>5 × 5 视角</strong><span>阵列布局示意 · 非场景图像</span></figcaption></figure></div><div class="specification-band"><div class="stats"><div class="stat"><strong>45</strong><span>场景序列</span></div><div class="stat"><strong>5 × 5</strong><span>25 个相机视角</span></div><div class="stat"><strong>1920 × 1080</strong><span>图像分辨率</span></div><div class="stat"><strong>60 FPS</strong><span>标称帧率</span></div></div><p class="volume"><span><strong>225,775</strong>张 JPEG 图像</span><span>约<strong>165.9 GB</strong></span></p></div></section>
-<section id="overview" class="research-section"><div class="section-heading"><p class="section-label">01 / 研究背景</p><h2>真实世界采集。<br>多视角观察。</h2></div><div class="research-grid"><div><p class="lead">RealDynLFV 是面向真实世界动态光场视频的大视差基准数据集，包含由 5 × 5 相机阵列采集的 45 个动态场景序列。</p><p class="section-detail">多视角信息与场景运动共同构成研究光场视频处理的基础。</p></div><aside class="alignment"><h3>采集与时间对齐</h3><p>各相机的视频通过音频信号在后期进行时间对齐，而非采用硬件同步。</p></aside></div></section>
-<section id="benchmark"><div class="section-heading"><p class="section-label">02 / 基准评测</p><h2>重建与编码，<br>统一的序列划分。</h2></div><div class="evaluation-grid"><div class="evaluated"><p class="task-tag">已评估任务</p><h3>重建与编码</h3><p>当前基准已评估的任务为光场视频重建与编码。</p></div><div class="partition"><div class="split" aria-label="32 个训练序列、5 个验证序列和 8 个测试序列"><div><strong>32</strong><span>训练集</span></div><div><strong>5</strong><span>验证集</span></div><div><strong>8</strong><span>测试集</span></div></div><p class="small">45 个序列 · 固定的训练、验证与测试划分。</p></div></div><div class="potential"><p class="task-tag">潜在应用</p><div><h3>视频插帧</h3><p>动态场景与多视角信息的结合，也为探索光场视频插帧提供了基础。</p></div></div></section>
-<section id="gallery"><div class="gallery-heading"><div class="section-heading"><p class="section-label">03 / 可视化示例</p><h2>场景、视角与运动。</h2></div><p class="small">此处预留可视化示例。</p></div><div class="gallery"><figure><div class="placeholder"><span class="frame-mark" aria-hidden="true">01</span></div><figcaption><p class="media-type">代表性中心视角图像</p><h3>真实场景</h3><p>展示当前基准中不同场景的真实外观。</p></figcaption></figure><figure><div class="placeholder"><span class="frame-mark" aria-hidden="true">02</span></div><figcaption><p class="media-type">时间对齐的多视角对比</p><h3>同一时刻，不同视角</h3><p>基于音频完成时间对齐后，同一场景在对应时刻的不同视角。</p></figcaption></figure><figure><div class="placeholder"><span class="frame-mark" aria-hidden="true">03</span></div><figcaption><p class="media-type">带视角标注的对比</p><h3>大视差</h3><p>展示场景外观随观察视角变化的真实示例。</p></figcaption></figure><figure><div class="placeholder"><span class="frame-mark" aria-hidden="true">04</span></div><figcaption><p class="media-type">短时场景片段</p><h3>动态场景</h3><p>通过短时光场视频片段观察场景运动。</p></figcaption></figure><figure><div class="placeholder"><span class="frame-mark" aria-hidden="true">05</span></div><figcaption><p class="media-type">相机阵列实物图</p><h3>采集设备</h3><p>用于记录多视角视频的相机阵列。</p></figcaption></figure></div></section>
-<section id="resources"><div class="section-heading"><p class="section-label">04 / 项目资源</p><h2>资源与引用</h2></div><p class="availability">基准数据集及配套资源正在准备发布。后续开放信息将在本项目主页更新。</p><div class="resource-grid"><div class="resource-list" aria-label="资源开放状态"><div class="resource">论文<span>出版信息待公布</span></div><div class="resource">数据集<span>准备中</span></div><div class="resource">代码<span>准备中</span></div><p class="small">完整数据集与代码暂未公开。</p><ul></ul></div><div class="citation" id="citation"><h3>引用信息待补充</h3><p>出版信息待公布，引用元数据将随后补充。</p></div></div></section></main><dialog class="image-viewer" aria-label="图片预览"><button type="button" class="viewer-close" autofocus>关闭预览</button><img alt=""><p></p></dialog><footer><span class="brand">RealDynLFV</span><span>IEEE VCIP 2026 · 已接收</span><a href="#top">返回顶部 ↑</a></footer></body></html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RealDynLFV | VCIP 2026</title>
+  <meta name="description" content="真实世界动态光场视频基准：45 个场景、5×5 视角、1080p、标称 60 fps。查看交互样例与 VCIP 2026 评测。">
+  <meta name="theme-color" content="#ffffff">
+  <meta property="og:title" content="RealDynLFV | VCIP 2026">
+  <meta property="og:description" content="真实世界动态光场视频基准：45 个场景、5×5 视角、1080p、标称 60 fps。查看交互样例与 VCIP 2026 评测。">
+  <meta property="og:image" content="https://xinpeng24huang.github.io/RealdynLFV-Homepage/assets/media/scene0042-poster.webp">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://xinpeng24huang.github.io/RealdynLFV-Homepage/zh.html">
+  <link rel="alternate" hreflang="en" href="index.html">
+  <link rel="alternate" hreflang="zh-CN" href="zh.html">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/language.js" defer></script>
+  <script src="assets/gallery.js" defer></script>
+  <script src="assets/demo.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">跳至正文</a>
+<header class="site-header wrap">
+  <a class="brand" href="#top" aria-label="RealDynLFV"><span class="brand-array" aria-hidden="true"></span>RealDynLFV</a>
+  <nav aria-label="主导航"><a href="#explore">交互样例</a><a href="#dataset">数据集</a><a href="#benchmark">评测</a><a href="#resources">资源</a></nav>
+  <a class="language-switch" href="index.html" lang="en" hreflang="en" data-language="en">EN</a>
+</header>
+<main id="main">
+  <section class="masthead wrap" id="top">
+    <p class="conference">IEEE VCIP 2026 <span>已接收</span></p>
+    <h1>RealDynLFV<span class="title-separator">: </span><span class="full-title">A Large-Parallax Benchmark for<br class="desktop-break"> Real-World Dynamic Light Field Video</span></h1>
+    <p class="authors">Zhehao Han, Yinfeng Zheng, Yifan Mao, Xianliang Wu, Xinpeng Huang<sup>*</sup>, Chao Yang, Ping An</p>
+    <p class="affiliation">上海大学通信与信息工程学院 <span class="corresponding">* 通讯作者</span></p>
+    <div class="intro-links"><a href="#explore">探索不同视角</a><a href="#benchmark">评测结果</a><a href="#citation">引用本文</a></div>
+  </section>
+  <section class="motion-section wrap" aria-labelledby="motion-title">
+    <div class="motion-layout">
+      <div class="video-column">
+        <div class="video-stage">
+          <video id="scene-video" controls playsinline muted preload="none" poster="assets/media/scene0042-poster.webp" aria-label="场景 0042：人物跑过球场，中心相机 C3 或 5×5 相机阵列"><source src="assets/media/scene0042-center.mp4" type="video/mp4">可下载样例视频观看。 <a href="assets/media/scene0042-center.mp4">下载视频</a></video>
+          <button type="button" id="play-video" class="play-video" hidden><span aria-hidden="true">▶</span>播放样例</button>
+        </div>
+        <div class="video-toolbar"><span>场景 0042 / 球场</span><div class="video-modes" role="group" aria-label="视频视角"><button type="button" data-video="center" aria-pressed="true">中心视角</button><button type="button" data-video="grid" aria-pressed="false">5×5 阵列</button></div></div>
+        <p class="caption">约 2.5 秒片段，按原始 59.94 fps 播放。可切换中心视角与完整 5×5 阵列。</p>
+        <p class="media-error" id="video-error" role="status"></p>
+      </div>
+      <div class="motion-copy">
+        <h2 id="motion-title">25 个视角中的运动</h2>
+        <p>消费级相机阵列记录真实动态场景，呈现运动中的物体及不同视角间明显的视差。</p>
+        <dl class="specs"><div><dt>动态场景</dt><dd>45</dd></div><div><dt>相机视角</dt><dd>5 × 5</dd></div><div><dt>单视角分辨率</dt><dd>1920 × 1080</dd></div><div><dt>标称帧率</dt><dd>60</dd></div></dl>
+        <p class="motion-note">播放视频观察运动；在下方选择不同相机，查看同一时刻的视差。</p>
+      </div>
+    </div>
+  </section>
+  <section class="explore-section" id="explore">
+    <div class="wrap">
+      <div class="section-heading"><h2>同一时刻，25 个视角</h2><p>切换观察位置，看人物和近处地面相对远处背景如何移动。</p></div>
+      <div class="explorer" data-view-label="视角" data-camera-label="相机" data-error="图片加载失败，请重新选择相机。">
+        <figure class="view-stage">
+          <a class="image-preview selected-view-link" href="assets/media/scene0042-view-12.webp" data-image-preview>
+            <img id="selected-view" src="assets/media/scene0042-view-12.webp" width="960" height="540" alt="球场场景 0042，第 91 帧，相机 C3 (v12)" loading="lazy" decoding="async">
+            <span class="expand-hint">放大图片</span>
+          </a>
+          <figcaption><span id="view-label" aria-live="polite">相机 C3 <span class="view-code">v12</span></span><span>第 91 帧 / t = 1.502 秒</span></figcaption>
+        </figure>
+        <div class="view-controls">
+          <h3>选择相机</h3><p>点击阵列中的位置切换视角，也可使用方向键。</p>
+          <div class="view-grid" role="group" aria-label="5 行 5 列相机，A1 至 E5"><button type="button" class="view-button" data-view="00" data-camera="A1" aria-pressed="false" aria-label="相机 A1, 视角 00" title="A1 / v00">A1</button><button type="button" class="view-button" data-view="01" data-camera="A2" aria-pressed="false" aria-label="相机 A2, 视角 01" title="A2 / v01">A2</button><button type="button" class="view-button" data-view="02" data-camera="A3" aria-pressed="false" aria-label="相机 A3, 视角 02" title="A3 / v02">A3</button><button type="button" class="view-button" data-view="03" data-camera="A4" aria-pressed="false" aria-label="相机 A4, 视角 03" title="A4 / v03">A4</button><button type="button" class="view-button" data-view="04" data-camera="A5" aria-pressed="false" aria-label="相机 A5, 视角 04" title="A5 / v04">A5</button><button type="button" class="view-button" data-view="05" data-camera="B1" aria-pressed="false" aria-label="相机 B1, 视角 05" title="B1 / v05">B1</button><button type="button" class="view-button" data-view="06" data-camera="B2" aria-pressed="false" aria-label="相机 B2, 视角 06" title="B2 / v06">B2</button><button type="button" class="view-button" data-view="07" data-camera="B3" aria-pressed="false" aria-label="相机 B3, 视角 07" title="B3 / v07">B3</button><button type="button" class="view-button" data-view="08" data-camera="B4" aria-pressed="false" aria-label="相机 B4, 视角 08" title="B4 / v08">B4</button><button type="button" class="view-button" data-view="09" data-camera="B5" aria-pressed="false" aria-label="相机 B5, 视角 09" title="B5 / v09">B5</button><button type="button" class="view-button" data-view="10" data-camera="C1" aria-pressed="false" aria-label="相机 C1, 视角 10" title="C1 / v10">C1</button><button type="button" class="view-button" data-view="11" data-camera="C2" aria-pressed="false" aria-label="相机 C2, 视角 11" title="C2 / v11">C2</button><button type="button" class="view-button" data-view="12" data-camera="C3" aria-pressed="true" aria-label="相机 C3, 视角 12" title="C3 / v12">C3</button><button type="button" class="view-button" data-view="13" data-camera="C4" aria-pressed="false" aria-label="相机 C4, 视角 13" title="C4 / v13">C4</button><button type="button" class="view-button" data-view="14" data-camera="C5" aria-pressed="false" aria-label="相机 C5, 视角 14" title="C5 / v14">C5</button><button type="button" class="view-button" data-view="15" data-camera="D1" aria-pressed="false" aria-label="相机 D1, 视角 15" title="D1 / v15">D1</button><button type="button" class="view-button" data-view="16" data-camera="D2" aria-pressed="false" aria-label="相机 D2, 视角 16" title="D2 / v16">D2</button><button type="button" class="view-button" data-view="17" data-camera="D3" aria-pressed="false" aria-label="相机 D3, 视角 17" title="D3 / v17">D3</button><button type="button" class="view-button" data-view="18" data-camera="D4" aria-pressed="false" aria-label="相机 D4, 视角 18" title="D4 / v18">D4</button><button type="button" class="view-button" data-view="19" data-camera="D5" aria-pressed="false" aria-label="相机 D5, 视角 19" title="D5 / v19">D5</button><button type="button" class="view-button" data-view="20" data-camera="E1" aria-pressed="false" aria-label="相机 E1, 视角 20" title="E1 / v20">E1</button><button type="button" class="view-button" data-view="21" data-camera="E2" aria-pressed="false" aria-label="相机 E2, 视角 21" title="E2 / v21">E2</button><button type="button" class="view-button" data-view="22" data-camera="E3" aria-pressed="false" aria-label="相机 E3, 视角 22" title="E3 / v22">E3</button><button type="button" class="view-button" data-view="23" data-camera="E4" aria-pressed="false" aria-label="相机 E4, 视角 23" title="E4 / v23">E4</button><button type="button" class="view-button" data-view="24" data-camera="E5" aria-pressed="false" aria-label="相机 E5, 视角 24" title="E5 / v24">E5</button></div>
+          <div class="view-actions"><button type="button" id="sweep-views" data-start="浏览中间一行" data-stop="停止浏览" aria-pressed="false">浏览中间一行</button><button type="button" id="reset-view">回到中心</button></div>
+          <p class="view-note">行号 A–E，列号 1–5。C3 为中心视角（v12），所有图片使用相同帧编号。</p><p class="media-error" id="image-error" role="status"></p>
+        </div>
+      </div>
+      <details class="media-details"><summary>样例与播放说明</summary><p>场景 0042 对应 Secondsyn/0030_seg02（源视频 16.0–18.5 秒）。中心视频采用 150 张标准化 JPEG，缩放至 1280×720；现有阵列预览含 149 个解码帧，分辨率为 1920×1080，保留原相机标注、裁剪和色彩。两者均以原始 59.94 fps 转码为 H.264 网页视频，不含音轨。</p><p>视角选择器采用全部 25 台相机的 JPEG 第 91 帧（t = 1.502 秒），缩放为 960×540 WebP，无额外裁剪或调色。各相机使用音频时间对齐与最近帧裁剪。</p></details>
+    </div>
+  </section>
+  <section class="dataset-section wrap" id="dataset">
+    <div class="dataset-layout">
+      <div class="dataset-copy"><h2>面向真实采集的基准</h2><p>RealDynLFV 包含 45 个动态序列：29 个室外、15 个室内及 1 个室内外混合场景。标准化序列共含 9,031 个时间帧，每帧包含 25 个视角。</p><p>大视差、遮挡和随视角变化的外观为稀疏视角重建带来挑战。数据也保留了消费级多相机采集中出现的几何与光度差异。</p><div class="split"><span><strong>32</strong>训练</span><span><strong>5</strong>验证</span><span><strong>8</strong>测试</span></div><p class="caption">按序列划分，测试场景与训练场景独立。</p></div>
+      <figure><a href="assets/media/scene-diversity.webp" class="image-preview" data-image-preview><img src="assets/media/scene-diversity.webp" alt="九个中心视角示例：室内物品、入口、楼梯、树木、汽车、自行车、围栏、绿植和篮球。" width="2000" height="1177" loading="lazy" decoding="async"><span class="expand-hint">放大图片</span></a><figcaption>论文中的中心视角场景示例。</figcaption></figure>
+    </div>
+    <div class="pipeline"><h3>从相机视频到光场序列</h3><a class="image-preview" href="assets/media/pipeline.webp" data-image-preview><img src="assets/media/pipeline.webp" width="2000" height="517" alt="处理流程：音频对齐、几何校正、共享裁剪、固定 LUT 及 5×5 JPEG 帧序列导出。" loading="lazy" decoding="async"><span class="expand-hint">放大图片</span></a><ol class="pipeline-steps"><li><h3>采集</h3><p>25 台运动相机，标称间距 80 mm；源视频为 4K/60 fps。</p></li><li><h3>对齐</h3><p>通过拍手音频估计偏移，按最近帧裁剪至共同起点。</p></li><li><h3>标准化</h3><p>标定校正、共享 16:9 裁剪、缩放至 1080p，并应用固定 D-Log M 至 Rec.709 LUT。</p></li><li><h3>导出</h3><p>生成视角索引与帧命名一致的 8 位 JPEG 序列。</p></li></ol></div>
+  </section>
+  <section class="benchmark-section" id="benchmark"><div class="wrap">
+    <div class="section-heading"><h2>稀疏视角重建与编码</h2><p>在四个编码设置下，数据集匹配训练均提升了重建质量。</p></div>
+    <div class="benchmark-layout">
+      <div class="benchmark-copy"><p>四角视角（v00、v04、v20、v24）经 MV-HEVC 编码，QP 为 30、35、40、45，解码端重建完整 25 视角。</p><p>在同一稀疏视角编码框架下，使用 RealDynLFV 训练优于直接迁移 Sintel 预训练模型。</p><p class="framework-source"><a href="https://doi.org/10.1109/TCSVT.2025.3598022">编码框架：Li 等，TCSVT</a></p><div class="gains"><div><strong>+0.2466 <small>dB</small></strong><span>PSNR-Y</span></div><div><strong>+0.0161</strong><span>SSIM-Y</span></div></div><p class="caption">相对 Sintel 零样本迁移的四 QP 平均增益。质量取重建后 25 视角均值，码率来自四视角码流。</p></div>
+      <figure><a class="image-preview" href="assets/media/benchmark-rd.webp" data-image-preview><img src="assets/media/benchmark-rd.webp" width="2000" height="851" alt="Sintel 零样本迁移与 RealDynLFV 匹配训练的率失真曲线，指标为 25 视角 PSNR-Y 和 SSIM-Y。" loading="lazy" decoding="async"><span class="expand-hint">放大图片</span></a><figcaption>8 个独立测试序列上的率失真结果。</figcaption></figure>
+    </div>
+    <details class="result-details"><summary>各量化参数下的结果</summary><div class="table-scroll"><table><caption>RealDynLFV 匹配训练相对 Sintel 零样本迁移的增益</caption><thead><tr><th scope="col">QP</th><th scope="col">码率 (Mbps)</th><th scope="col">ΔPSNR-Y (dB)</th><th scope="col">ΔSSIM-Y</th></tr></thead><tbody><tr><td>30</td><td>10.1665</td><td>+0.2438</td><td>+0.0176</td></tr><tr><td>35</td><td>5.6606</td><td>+0.2232</td><td>+0.0181</td></tr><tr><td>40</td><td>2.9758</td><td>+0.2927</td><td>+0.0173</td></tr><tr><td>45</td><td>1.4482</td><td>+0.2266</td><td>+0.0112</td></tr></tbody></table></div></details>
+  </div></section>
+  <section class="resources-section wrap" id="resources">
+    <div class="resource-copy"><h2>项目资源</h2><p>本页提供 RealDynLFV 交互样例。完整数据集计划在期刊扩展稿录用后公开。</p><div class="resource-links"><a class="button primary" href="assets/media/scene0042-grid.mp4" download="RealDynLFV-0042-5x5.mp4">下载 5×5 样例</a><a class="button" href="https://github.com/xinpeng24huang/RealdynLFV-Homepage">主页源码</a><a href="mailto:huangxinpeng@shu.edu.cn">联系作者</a></div></div>
+    <div class="citation" id="citation"><div class="citation-heading"><h3>引用</h3><button id="copy-citation" type="button" data-copied="已复制">复制 BibTeX</button></div><pre><code id="bibtex">@inproceedings{han2026realdynlfv,
+  title = {RealDynLFV: A Large-Parallax Benchmark for
+           Real-World Dynamic Light Field Video},
+  author = {Han, Zhehao and Zheng, Yinfeng and Mao, Yifan
+            and Wu, Xianliang and Huang, Xinpeng
+            and Yang, Chao and An, Ping},
+  booktitle = {IEEE Visual Communications and Image Processing (VCIP)},
+  year = {2026},
+  note = {Accepted},
+  url = {https://xinpeng24huang.github.io/RealdynLFV-Homepage/}
+}</code></pre><p id="copy-status" class="caption" role="status" data-failed="请选中引用文本复制。"></p></div>
+  </section>
+</main>
+<footer class="site-footer wrap"><div class="institution"><div class="institution-marks"><a href="https://www.shu.edu.cn/xxgk/sdwh/xxxf.htm" aria-label="上海大学"><img src="assets/identity/shu-emblem.png" width="255" height="322" loading="lazy" alt="上海大学校徽"></a><a href="https://scie.shu.edu.cn/info/1065/1790.htm" aria-label="通信与信息工程学院"><img src="assets/identity/scie-emblem.png" width="225" height="340" loading="lazy" alt="通信与信息工程学院院徽"></a></div><p>上海大学<br><span>通信与信息工程学院</span></p></div><p>RealDynLFV<br><span>IEEE VCIP 2026</span></p><a href="#top">返回顶部</a></footer>
+<dialog class="image-viewer" aria-label="图片预览"><button type="button" class="viewer-close" autofocus>关闭</button><img alt=""><p></p></dialog>
+</body></html>

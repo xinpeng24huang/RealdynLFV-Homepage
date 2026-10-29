@@ -1,10 +1,99 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{{name}} — Dynamic Light Field Video</title><meta name="description" content="RealDynLFV: a large-parallax benchmark for real-world dynamic light field video. Accepted at IEEE VCIP 2026. Resources under preparation."><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/style.css"><script src="assets/language.js" defer></script><script src="assets/gallery.js" defer></script></head>
-<body><a class="skip" href="#main">Skip to content</a><header><a class="brand" href="#top">RealDynLFV</a><nav aria-label="Main navigation"><a href="#overview">Overview</a><a href="#benchmark">Benchmark</a><a href="#gallery">Gallery</a><a href="#resources">Resources</a></nav><a class="language-switch" href="zh.html" lang="zh-CN" hreflang="zh-CN" data-language="zh">中文</a></header>
-<!-- Hierarchy: value and verified specifications first; research and evaluation second;
-     absent media and publication logistics third. One primary action. §2.1 §2.4 §3.6 -->
-<main id="main" tabindex="-1"><section class="hero" id="top"><div class="hero-layout"><div class="hero-copy"><p class="eyebrow">{{conference}} <span class="accepted">{{status}}</span></p><h1>{{name}}</h1><p class="value-statement">{{value_statement}}</p><p class="paper-title">{{title}}</p>{{authors_html}}<a class="primary" href="#overview">Explore the benchmark <span aria-hidden="true">&rarr;</span></a></div>{{hero_html}}</div><div class="specification-band"><div class="stats">{{stats_html}}</div><p class="volume"><span><strong>225,775</strong> JPEG images</span><span>Approximately <strong>165.9 GB</strong></span></p></div></section>
-<section id="overview" class="research-section"><div class="section-heading"><p class="section-label">01 / RESEARCH CONTEXT</p><h2>Real-world capture.<br>Multiple perspectives.</h2></div><div class="research-grid"><div><p class="lead">{{overview}}</p><p class="section-detail">{{research_context}}</p></div><aside class="alignment"><h3>Capture &amp; temporal alignment</h3><p>{{alignment}}.</p></aside></div></section>
-<section id="benchmark"><div class="section-heading"><p class="section-label">02 / EVALUATION</p><h2>Reconstruction and coding,<br>with a fixed sequence split.</h2></div><div class="evaluation-grid"><div class="evaluated"><p class="task-tag">EVALUATED TASKS</p><h3>Reconstruction &amp; coding</h3><p>{{validated_tasks}}</p></div><div class="partition"><div class="split" aria-label="32 training, 5 validation and 8 test sequences"><div><strong>32</strong><span>Train</span></div><div><strong>5</strong><span>Validation</span></div><div><strong>8</strong><span>Test</span></div></div><p class="small">45 sequences · fixed training, validation and test partitions.</p></div></div><div class="potential"><p class="task-tag">POTENTIAL APPLICATION</p><div><h3>Video interpolation</h3><p>{{potential_tasks}}</p></div></div></section>
-<section id="gallery"><div class="gallery-heading"><div class="section-heading"><p class="section-label">03 / VISUAL EXAMPLES</p><h2>Scenes, views and motion.</h2></div><p class="small">Visual examples will be added here.</p></div><div class="gallery">{{gallery_html}}</div></section>
-<section id="resources"><div class="section-heading"><p class="section-label">04 / RESOURCES</p><h2>Resources &amp; citation</h2></div><p class="availability">{{availability}}</p><div class="resource-grid"><div class="resource-list" aria-label="Resource availability">{{resources_html}}<p class="small">Full dataset and code: not publicly available.</p><ul>{{releases_html}}</ul></div><div class="citation" id="citation">{{citation_html}}</div></div></section></main><dialog class="image-viewer" aria-label="Image preview"><button type="button" class="viewer-close" autofocus>Close preview</button><img alt=""><p></p></dialog><footer><span class="brand">RealDynLFV</span><span>IEEE VCIP 2026 · Accepted</span><a href="#top">Back to top ↑</a></footer></body></html>
+<html lang="{{lang}}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{page_title}}</title>
+  <meta name="description" content="{{meta_description}}">
+  <meta name="theme-color" content="#ffffff">
+  <meta property="og:title" content="{{page_title}}">
+  <meta property="og:description" content="{{meta_description}}">
+  <meta property="og:image" content="https://xinpeng24huang.github.io/RealdynLFV-Homepage/assets/media/scene0042-poster.webp">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://xinpeng24huang.github.io/RealdynLFV-Homepage/{{page_file}}">
+  <link rel="alternate" hreflang="en" href="index.html">
+  <link rel="alternate" hreflang="zh-CN" href="zh.html">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/language.js" defer></script>
+  <script src="assets/gallery.js" defer></script>
+  <script src="assets/demo.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">{{skip}}</a>
+<header class="site-header wrap">
+  <a class="brand" href="#top" aria-label="RealDynLFV"><span class="brand-array" aria-hidden="true"></span>RealDynLFV</a>
+  <nav aria-label="{{navigation}}"><a href="#explore">{{nav_explore}}</a><a href="#dataset">{{nav_dataset}}</a><a href="#benchmark">{{nav_benchmark}}</a><a href="#resources">{{nav_resources}}</a></nav>
+  <a class="language-switch" href="{{switch_href}}" lang="{{switch_lang}}" hreflang="{{switch_lang}}" data-language="{{switch_lang}}">{{switch_text}}</a>
+</header>
+<main id="main">
+  <section class="masthead wrap" id="top">
+    <p class="conference">IEEE VCIP 2026 <span>{{accepted}}</span></p>
+    <h1>RealDynLFV<span class="title-separator">: </span><span class="full-title">A Large-Parallax Benchmark for<br class="desktop-break"> Real-World Dynamic Light Field Video</span></h1>
+    <p class="authors">{{authors_html}}</p>
+    <p class="affiliation">{{affiliation}} <span class="corresponding">{{corresponding}}</span></p>
+    <div class="intro-links"><a href="#explore">{{explore_views}}</a><a href="#benchmark">{{see_results}}</a><a href="#citation">{{cite}}</a></div>
+  </section>
+  <section class="motion-section wrap" aria-labelledby="motion-title">
+    <div class="motion-layout">
+      <div class="video-column">
+        <div class="video-stage">
+          <video id="scene-video" controls playsinline muted preload="none" poster="assets/media/scene0042-poster.webp" aria-label="{{video_alt}}"><source src="assets/media/scene0042-center.mp4" type="video/mp4">{{video_fallback}} <a href="assets/media/scene0042-center.mp4">{{download_video}}</a></video>
+          <button type="button" id="play-video" class="play-video" hidden><span aria-hidden="true">▶</span>{{play_video}}</button>
+        </div>
+        <div class="video-toolbar"><span>{{scene_label}}</span><div class="video-modes" role="group" aria-label="{{video_modes}}"><button type="button" data-video="center" aria-pressed="true">{{center_view}}</button><button type="button" data-video="grid" aria-pressed="false">{{array_view}}</button></div></div>
+        <p class="caption">{{video_caption}}</p>
+        <p class="media-error" id="video-error" role="status"></p>
+      </div>
+      <div class="motion-copy">
+        <h2 id="motion-title">{{motion_title}}</h2>
+        <p>{{motion_description}}</p>
+        <dl class="specs">{{stats_html}}</dl>
+        <p class="motion-note">{{motion_note}}</p>
+      </div>
+    </div>
+  </section>
+  <section class="explore-section" id="explore">
+    <div class="wrap">
+      <div class="section-heading"><h2>{{explore_title}}</h2><p>{{explore_intro}}</p></div>
+      <div class="explorer" data-view-label="{{view}}" data-camera-label="{{camera}}" data-error="{{image_error}}">
+        <figure class="view-stage">
+          <a class="image-preview selected-view-link" href="assets/media/scene0042-view-12.webp" data-image-preview>
+            <img id="selected-view" src="assets/media/scene0042-view-12.webp" width="960" height="540" alt="{{view_alt}} C3 (v12)" loading="lazy" decoding="async">
+            <span class="expand-hint">{{enlarge}}</span>
+          </a>
+          <figcaption><span id="view-label" aria-live="polite">{{camera}} C3 <span class="view-code">v12</span></span><span>{{frame_label}}</span></figcaption>
+        </figure>
+        <div class="view-controls">
+          <h3>{{choose_view}}</h3><p>{{view_instruction}}</p>
+          <div class="view-grid" role="group" aria-label="{{array_label}}">{{view_buttons_html}}</div>
+          <div class="view-actions"><button type="button" id="sweep-views" data-start="{{sweep}}" data-stop="{{stop_sweep}}" aria-pressed="false">{{sweep}}</button><button type="button" id="reset-view">{{reset}}</button></div>
+          <p class="view-note">{{view_note}}</p><p class="media-error" id="image-error" role="status"></p>
+        </div>
+      </div>
+      <details class="media-details"><summary>{{sample_details_title}}</summary><p>{{sample_details}}</p><p>{{sample_timing}}</p></details>
+    </div>
+  </section>
+  <section class="dataset-section wrap" id="dataset">
+    <div class="dataset-layout">
+      <div class="dataset-copy"><h2>{{dataset_title}}</h2><p>{{dataset_description}}</p><p>{{dataset_challenges}}</p><div class="split"><span><strong>32</strong>{{train}}</span><span><strong>5</strong>{{validation}}</span><span><strong>8</strong>{{test}}</span></div><p class="caption">{{split_caption}}</p></div>
+      <figure><a href="assets/media/scene-diversity.webp" class="image-preview" data-image-preview><img src="assets/media/scene-diversity.webp" alt="{{diversity_alt}}" width="2000" height="1177" loading="lazy" decoding="async"><span class="expand-hint">{{enlarge}}</span></a><figcaption>{{diversity_caption}}</figcaption></figure>
+    </div>
+    <div class="pipeline"><h3>{{pipeline_title}}</h3><a class="image-preview" href="assets/media/pipeline.webp" data-image-preview><img src="assets/media/pipeline.webp" width="2000" height="517" alt="{{pipeline_alt}}" loading="lazy" decoding="async"><span class="expand-hint">{{enlarge}}</span></a><ol class="pipeline-steps">{{steps_html}}</ol></div>
+  </section>
+  <section class="benchmark-section" id="benchmark"><div class="wrap">
+    <div class="section-heading"><h2>{{benchmark_title}}</h2><p>{{benchmark_intro}}</p></div>
+    <div class="benchmark-layout">
+      <div class="benchmark-copy"><p>{{benchmark_protocol}}</p><p>{{benchmark_comparison}}</p><p class="framework-source"><a href="https://doi.org/10.1109/TCSVT.2025.3598022">{{framework_source}}</a></p><div class="gains"><div><strong>+0.2466 <small>dB</small></strong><span>PSNR-Y</span></div><div><strong>+0.0161</strong><span>SSIM-Y</span></div></div><p class="caption">{{gains_caption}}</p></div>
+      <figure><a class="image-preview" href="assets/media/benchmark-rd.webp" data-image-preview><img src="assets/media/benchmark-rd.webp" width="2000" height="851" alt="{{rd_alt}}" loading="lazy" decoding="async"><span class="expand-hint">{{enlarge}}</span></a><figcaption>{{rd_caption}}</figcaption></figure>
+    </div>
+    <details class="result-details"><summary>{{results_details}}</summary><div class="table-scroll"><table><caption>{{table_caption}}</caption><thead><tr><th scope="col">QP</th><th scope="col">{{bitrate}}</th><th scope="col">ΔPSNR-Y (dB)</th><th scope="col">ΔSSIM-Y</th></tr></thead><tbody>{{results_html}}</tbody></table></div></details>
+  </div></section>
+  <section class="resources-section wrap" id="resources">
+    <div class="resource-copy"><h2>{{resources_title}}</h2><p>{{release_text}}</p><div class="resource-links"><a class="button primary" href="assets/media/scene0042-grid.mp4" download="RealDynLFV-0042-5x5.mp4">{{sample_download}}</a><a class="button" href="https://github.com/xinpeng24huang/RealdynLFV-Homepage">{{repository}}</a><a href="mailto:huangxinpeng@shu.edu.cn">{{contact}}</a></div></div>
+    <div class="citation" id="citation"><div class="citation-heading"><h3>{{citation_title}}</h3><button id="copy-citation" type="button" data-copied="{{copied}}">{{copy}}</button></div><pre><code id="bibtex">{{citation}}</code></pre><p id="copy-status" class="caption" role="status" data-failed="{{copy_failed}}"></p></div>
+  </section>
+</main>
+<footer class="site-footer wrap"><div class="institution"><div class="institution-marks"><a href="https://www.shu.edu.cn/xxgk/sdwh/xxxf.htm" aria-label="{{university}}"><img src="assets/identity/shu-emblem.png" width="255" height="322" loading="lazy" alt="{{university_logo}}"></a><a href="https://scie.shu.edu.cn/info/1065/1790.htm" aria-label="{{school}}"><img src="assets/identity/scie-emblem.png" width="225" height="340" loading="lazy" alt="{{school_logo}}"></a></div><p>{{university}}<br><span>{{school}}</span></p></div><p>RealDynLFV<br><span>IEEE VCIP 2026</span></p><a href="#top">{{back_top}}</a></footer>
+<dialog class="image-viewer" aria-label="{{image_preview}}"><button type="button" class="viewer-close" autofocus>{{close_preview}}</button><img alt=""><p></p></dialog>
+</body></html>

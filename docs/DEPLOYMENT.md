@@ -1,17 +1,23 @@
-# GitHub Pages maintenance
+# Deployment and maintenance
 
-This repository contains a lightweight static project site. The current deployment target is the personal project repository `WaterPig02/RealdynLFV-Homepage`, not the account's root homepage. The expected project address is `https://waterpig02.github.io/RealdynLFV-Homepage/`; a deployment must complete before that address is treated as live.
+The permanent project address is **https://xinpeng24huang.github.io/RealdynLFV-Homepage/**.
+The repository is **https://github.com/xinpeng24huang/RealdynLFV-Homepage**.
 
-## Branch deployment
+## Preview and release
 
-Build `index.html` with `python3 scripts/build.py`, then run `python3 scripts/check.py`. Review and commit the generated page alongside its sources. In repository Settings → Pages, select **Deploy from a branch**, branch `main`, folder `/(root)`, and Save. `.nojekyll` is included. Wait for the Pages deployment to succeed, then check the exact URL GitHub reports, including CSS/favicon loading and mobile navigation.
+1. Check `git remote -v` and the working branch. The remote owner must be `xinpeng24huang`.
+2. Edit `content.json`, `template.html`, styles and scripts as needed.
+3. Run `python scripts/build.py` and `python scripts/check.py`.
+4. Review English and Chinese pages on desktop and mobile, including videos and view controls.
+5. Obtain the author's approval to publish the reviewed preview.
+6. Commit the content sources, generated `index.html` and `zh.html`, and reviewed web assets together.
+7. Publish the approved commit to the official repository's `main` branch. Pages serves `main` at `/(root)` and deploys committed files automatically; it does not execute Python.
+8. After deployment succeeds, check the permanent URL, both languages, assets, playback and mobile layout. Compare served HTML to the approved build.
 
-No custom workflow, OIDC configuration, custom domain, database or paid service is needed for this public static project site. GitHub Free supports Pages from public repositories, including public organization repositories. Private repository hosting has different plan requirements. [Official availability and site types](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages), [publishing-source instructions](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site). Documentation checked 2026-10-21.
+Keep the repository name and owner unchanged so the URL cited in the paper stays valid. Use relative internal URLs for project-subdirectory hosting.
 
-## Stable links and future organization ownership
+## Content scope
 
-Project sites use `https://<owner>.github.io/<repository>/`. Organization root sites instead require a repository named `<organization>.github.io` and occupy the organization's root homepage. Prefer a project repository if moving this project to shared organization ownership later. Choose names before citing a permanent URL; renames and transfers can change the address. Do not assume a future organization name or URL already exists. [Official site types](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages).
+The site currently provides the project introduction, selected scene 0042 sample, paper figures and citation. Full dataset release is planned after acceptance of the journal extension. Add public paper or data links when their versions and destinations are confirmed. Keep raw data, private notes, temporary QA artifacts and full local packages outside the repository.
 
-Routine organization editors can receive Write access. Maintain can configure the Pages publishing source; reserve Admin for sensitive settings and access management. [Official repository role matrix](https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-repository-roles/repository-roles-for-an-organization). Team access controls are included in [GitHub Free for organizations](https://docs.github.com/get-started/learning-about-github/githubs-products).
-
-Host large datasets separately. Update verified version-specific download and citation links in `content.json`, rebuild and review the page, then push the approved changes. Source-branch publishing redeploys automatically once configured. Do not place full datasets in this site repository. [Official Pages limits](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits).
+The citation records the accepted VCIP 2026 paper. Add DOI and proceedings page numbers when assigned. Dataset licensing remains an author decision.

@@ -1,34 +1,80 @@
-import pathlib,json,re
+"""Check generated pages, relative assets, bilingual structure, and sample integrity."""
+from pathlib import Path
 from html.parser import HTMLParser
-root=pathlib.Path(__file__).resolve().parents[1]
-class Check(HTMLParser):
- def __init__(self):super().__init__();self.ids=[];self.links=[];self.assets=[]
- def handle_starttag(self,tag,attrs):
-  d=dict(attrs)
-  if 'id' in d:self.ids.append(d['id'])
-  if tag=='a':self.links.append(d.get('href',''))
-  if tag in ('link','img','script'):self.assets.append(d.get('href',d.get('src','')))
-p=Check();text=(root/'index.html').read_text();p.feed(text)
-assert len(p.ids)==len(set(p.ids))
-assert all((a.startswith('#') and a[1:] in p.ids) or a == 'zh.html' for a in p.links), 'Current preview must have only valid section links'
-assert all((root/a).is_file() for a in p.assets if a)
-assert '{{' not in text
-for t in ['225,775','165.9','1920 × 1080','60 FPS','Accepted','not publicly available','Citation coming soon']:assert t in text
-for t in ['Published','CC BY-NC','Paper ID','doi.org']:assert t not in text
-assert '<script src="assets/language.js" defer></script>' in text
-for t in ['audio signals', 'rather than hardware synchronization', 'Reconstruction &amp; coding', 'POTENTIAL APPLICATION', 'Publication details are pending']: assert t in text
-assert '5 × 5 synchronized' not in text
-def lum(h):
- c=[int(h[i:i+2],16)/255 for i in (0,2,4)];return sum((v/12.92 if v<=.04045 else ((v+.055)/1.055)**2.4)*w for v,w in zip(c,[.2126,.7152,.0722]))
-ratios={}
-for fg,bg in [('142c32','f9faf6'),('4d6369','f9faf6'),('17655f','f9faf6'),('ffffff','142c32'),('516c62','edf1ed'),('3b5750','eaf0eb'),('435d54','e8efea')]:
- a,b=sorted([lum(fg),lum(bg)]);ratio=(b+.05)/(a+.05);assert ratio>=4.5;ratios[fg+'/'+bg]=round(ratio,2)
-r={'html_links_assets':'pass','unique_ids':'pass','factual_guardrails':'pass','runtime_javascript':'language preference and approved-image viewer','contrast_ratios':ratios,'runtime_bytes':sum((root/f).stat().st_size for f in ['index.html','assets/style.css','assets/favicon.svg','assets/language.js','assets/gallery.js'])}
-(root/'evidence').mkdir(exist_ok=True)
-(root/'evidence/static-results.json').write_text(json.dumps(r,indent=2));print(json.dumps(r,indent=2))
+from urllib.parse import urlsplit
+import json
+import re
+from build import render
 
-zh=(root/'zh.html').read_text()
-assert 'lang="zh-CN"' in zh
-for phrase in ['音频信号','而非采用硬件同步','已评估任务','潜在应用','完整数据集与代码暂未公开','href="index.html"']: assert phrase in zh
-for phrase in ['Under preparation','Real-world scenes','Publication pending','Back to top']: assert phrase not in zh
-print('Chinese static content and language metadata: PASS')
+ROOT = Path(__file__).resolve().parents[1]
+
+
+class Page(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.ids, self.refs, self.images, self.buttons = [], [], [], []
+        self.h1 = 0
+        self.lang = None
+
+    def handle_starttag(self, tag, attrs):
+        a = dict(attrs)
+        if 'id' in a:
+            self.ids.append(a['id'])
+        if tag == 'html':
+            self.lang = a.get('lang')
+        if tag == 'h1':
+            self.h1 += 1
+        for key in ['href', 'src', 'poster']:
+            if a.get(key):
+                self.refs.append(a[key])
+        if tag == 'img':
+            self.images.append(a)
+        if 'data-view' in a:
+            self.buttons.append(a)
+
+
+def main():
+    c = json.loads((ROOT/'content.json').read_text(encoding='utf-8'))
+    assert c['locales']['en'].keys() == c['locales']['zh'].keys(), 'Missing translation'
+    pages = []
+    for locale, filename in [('en', 'index.html'), ('zh', 'zh.html')]:
+        text = (ROOT/filename).read_text(encoding='utf-8')
+        assert text == render(c, locale), f'{filename} is stale; run build.py'
+        p = Page()
+        p.feed(text)
+        assert p.h1 == 1 and len(p.ids) == len(set(p.ids))
+        assert p.lang == ('en' if locale == 'en' else 'zh-CN')
+        for ref in p.refs:
+            u = urlsplit(ref)
+            if u.scheme:
+                assert u.scheme in ('https', 'mailto'), f'Unexpected URL: {ref}'
+                continue
+            assert not u.netloc and not u.path.startswith('/'), f'Nonportable asset: {ref}'
+            assert '..' not in Path(u.path).parts
+            if u.path:
+                assert (ROOT/u.path).is_file(), f'Missing local file: {ref}'
+            elif u.fragment:
+                assert u.fragment in p.ids, f'Broken anchor: {ref}'
+        assert all('alt' in a for a in p.images), 'Missing image alternative'
+        assert len(p.buttons) == 25
+        assert [a['data-view'] for a in p.buttons] == [f'{i:02}' for i in range(25)]
+        assert sum(a.get('aria-pressed') == 'true' for a in p.buttons) == 1
+        for logo in ['shu-emblem.png', 'scie-emblem.png']:
+            assert sum(a.get('src', '').endswith(logo) for a in p.images) == 1
+        assert '{{' not in text and 'WaterPig02' not in text and 'placeholder' not in text
+        pages.append(p)
+        print(f'{filename}: current build, local resources, anchors, 25 views, logos and language PASS')
+    assert pages[0].ids == pages[1].ids, 'Languages have different sections'
+    for i in range(25):
+        assert (ROOT/f'assets/media/scene0042-view-{i:02}.webp').is_file()
+    for filename in ['scene0042-center.mp4', 'scene0042-grid.mp4', 'scene0042-grid-poster.webp']:
+        assert (ROOT/'assets/media'/filename).is_file()
+    for path in (ROOT/'assets').rglob('*'):
+        if path.is_file():
+            assert path.stat().st_size < 15_000_000, f'Oversized web asset: {path.name}'
+    print('Bilingual sections, on-demand sample assets and per-file size budget: PASS')
+    print('Static checks complete. Browser playback and visual review are separate checks.')
+
+
+if __name__ == '__main__':
+    main()
